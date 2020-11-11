@@ -14,8 +14,6 @@ import javax.inject.Inject
 abstract class BaseActivity<V : BaseViewModel> : AppCompatActivity() {
     lateinit var viewModel: V
 
-//    lateinit var fragmentComponent: FragmentComponent
-
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -28,8 +26,6 @@ abstract class BaseActivity<V : BaseViewModel> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        initFragmentComponent()
-
         viewModel = provideViewModel(viewModelFactory)
 
         if (layout() != 0) {
@@ -37,13 +33,4 @@ abstract class BaseActivity<V : BaseViewModel> : AppCompatActivity() {
             initialization()
         }
     }
-
-//    fun initFragmentComponent() {
-//        if (!::fragmentComponent.isInitialized) {
-//            fragmentComponent = App[this].appComponent.plus(
-//                FragmentModule(R.id.fragment_container, this as BaseActivity<BaseViewModel>)
-//            )
-//            fragmentComponent.inject(this)
-//        }
-//    }
 }

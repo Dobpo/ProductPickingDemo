@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.productpickingdemo.R
 import com.example.productpickingdemo.base.BaseFragment
 import com.example.productpickingdemo.utils.injectViewModel
+import kotlinx.android.synthetic.main.fragment_orders.*
 
 class OrdersFragment : BaseFragment<OrderViewModel>() {
     override fun layout(): Int {
@@ -16,6 +17,8 @@ class OrdersFragment : BaseFragment<OrderViewModel>() {
     }
 
     override fun initialization(view: View, isFirstInit: Boolean) {
-        TODO("Not yet implemented")
+        btnGoBack.setOnClickListener{
+            navController.navigateUp()
+        }
     }
 }
