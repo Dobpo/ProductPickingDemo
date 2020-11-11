@@ -7,7 +7,7 @@ import com.example.productpickingdemo.data_base.RoomDateBase
 import com.example.productpickingdemo.qr.QrScannerManager
 import javax.inject.Inject
 
-abstract class BaseViewModel(val app: Application) : AndroidViewModel(app)  {
+abstract class BaseViewModel(val app: Application) : AndroidViewModel(app) {
     @Inject
     lateinit var dbManager: RoomDateBase
 

@@ -1,5 +1,5 @@
 package com.example.productpickingdemo.qr
 
-interface QrScannerManager{
+interface QrScannerManager {
     fun getUserTest()
 }

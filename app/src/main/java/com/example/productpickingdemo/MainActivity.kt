@@ -1,13 +1,13 @@
 package com.example.productpickingdemo
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
+import com.example.productpickingdemo.base.BaseActivity
 import com.example.productpickingdemo.utils.OnBackPressedListener
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     lateinit var navController: NavController
     lateinit var navHostFragment: NavHostFragment
 

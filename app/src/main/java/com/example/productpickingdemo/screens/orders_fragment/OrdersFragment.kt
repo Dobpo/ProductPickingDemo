@@ -17,7 +17,7 @@ class OrdersFragment : BaseFragment<OrderViewModel>() {
     }
 
     override fun initialization(view: View, isFirstInit: Boolean) {
-        btnGoBack.setOnClickListener{
+        btnGoBack.setOnClickListener {
             navController.navigateUp()
         }
     }

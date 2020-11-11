@@ -6,6 +6,7 @@ import android.content.Context
 import com.example.productpickingdemo.dagger.components.AppComponent
 import com.example.productpickingdemo.dagger.components.DaggerAppComponent
 import com.example.productpickingdemo.dagger.modules.AppModule
+import com.example.productpickingdemo.dagger.modules.DataModule
 
 class App : Application() {
 
@@ -26,5 +27,6 @@ class App : Application() {
     private fun initDagger(): AppComponent =
         DaggerAppComponent.builder()
             .appModule(AppModule(this))
+            .dataModule(DataModule(this))
             .build()
 }

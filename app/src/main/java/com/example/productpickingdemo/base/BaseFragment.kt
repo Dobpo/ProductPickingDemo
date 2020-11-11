@@ -28,7 +28,7 @@ abstract class BaseFragment<V : BaseViewModel> : Fragment(), OnBackPressedListen
     protected lateinit var baseContext: Context
 
     @Inject
-    lateinit var baseActivity: BaseActivity<*>
+    lateinit var baseActivity: BaseActivity
 
     protected var rootView: View? = null
     var isVisible: (fragment: Fragment) -> Boolean = { true }
@@ -37,6 +37,16 @@ abstract class BaseFragment<V : BaseViewModel> : Fragment(), OnBackPressedListen
     protected abstract fun layout(): Int
     protected abstract fun provideViewModel(viewModelFactory: ViewModelProvider.Factory): V
     protected abstract fun initialization(view: View, isFirstInit: Boolean)
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try {
+            (context as BaseActivity).fragmentComponent.inject(this as BaseFragment<BaseViewModel>)
+        } catch (e: UninitializedPropertyAccessException) {
+            (context as BaseActivity).initFragmentComponent()
+            context.fragmentComponent.inject(this as BaseFragment<BaseViewModel>)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
