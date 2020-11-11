@@ -30,7 +30,6 @@ abstract class BaseFragment<V : BaseViewModel> : Fragment(), OnBackPressedListen
     @Inject
     lateinit var baseActivity: BaseActivity<*>
 
-
     protected var rootView: View? = null
     var isVisible: (fragment: Fragment) -> Boolean = { true }
 
@@ -38,7 +37,6 @@ abstract class BaseFragment<V : BaseViewModel> : Fragment(), OnBackPressedListen
     protected abstract fun layout(): Int
     protected abstract fun provideViewModel(viewModelFactory: ViewModelProvider.Factory): V
     protected abstract fun initialization(view: View, isFirstInit: Boolean)
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
