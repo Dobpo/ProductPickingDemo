@@ -1,8 +1,8 @@
 package com.example.productpickingdemo.dagger.modules
 
 import android.app.Application
-import com.example.productpickingdemo.data_base.RoomDateBase
-import com.example.productpickingdemo.data_base.RoomDateBaseImpl
+import com.example.productpickingdemo.data_base.AppDatabase
+import com.example.productpickingdemo.data_base.DateBaseImpl
 import com.example.productpickingdemo.qr.QrScannerManager
 import com.example.productpickingdemo.qr.QrScannerManagerImpl
 import dagger.Module
@@ -13,7 +13,7 @@ import javax.inject.Singleton
 class DataModule(private val context: Application) {
     @Provides
     @Singleton
-    fun provideRoomDataBase(): RoomDateBase = RoomDateBaseImpl(context)
+    fun provideRoomDataBase(): AppDatabase = DateBaseImpl(context)
 
     @Provides
     @Singleton
