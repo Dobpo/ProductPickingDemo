@@ -23,5 +23,23 @@
         android:id="@+id/ordersFragment"
         android:name="com.example.productpickingdemo.screens.orders_fragment.OrdersFragment"
         android:label="OrdersFragment"
-        tools:layout="@layout/fragment_orders" />
+        tools:layout="@layout/fragment_orders">
+        <action
+            android:id="@+id/action_ordersFragment_to_productsFragment"
+            app:destination="@id/productsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/productsFragment"
+        android:name="com.example.productpickingdemo.screens.products_fragment.ProductsFragment"
+        android:label="ProductsFragment"
+        tools:layout="@layout/fragment_products">
+        <argument
+            android:name="order"
+            app:argType="com.example.productpickingdemo.data_base.entities.Order" />
+    </fragment>
 </navigation>

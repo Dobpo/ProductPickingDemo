@@ -17,7 +17,8 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
     }
 
     override fun initialization(view: View, isFirstInit: Boolean) {
-        btnLogin.setOnClickListener {
+
+        btnSubmit.setOnClickListener {
             navController.navigate(LoginFragmentDirections.actionLoginFragmentToOrdersFragment())
         }
     }
