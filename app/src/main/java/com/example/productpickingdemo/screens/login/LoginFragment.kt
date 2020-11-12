@@ -22,15 +22,9 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
     override fun initialization(view: View, isFirstInit: Boolean) {
 
         btnSubmit.setOnClickListener {
-//            val integrator = IntentIntegrator(activity)
-//            integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES)
-//            integrator.setPrompt("Scan a barcode")
-//            integrator.setCameraId(0) // Use a specific camera of the device
-//            integrator.setOrientationLocked(true)
-//            integrator.setBeepEnabled(false)
-//            integrator.setBarcodeImageEnabled(true)
-//            integrator.initiateScan()
-            IntentIntegrator.forSupportFragment(this).initiateScan()
+            IntentIntegrator.forSupportFragment(this@LoginFragment)
+                .setBeepEnabled(false)
+                .initiateScan()
         }
     }
 
