@@ -1,13 +1,10 @@
 package com.example.productpickingdemo.data_base.daos
 
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
-import androidx.room.Update
 import com.example.productpickingdemo.data_base.entities.Location
 
-
+@Dao
 interface LocationDao {
     @Query("SELECT * FROM locations")
     fun getAll(): List<Location?>?

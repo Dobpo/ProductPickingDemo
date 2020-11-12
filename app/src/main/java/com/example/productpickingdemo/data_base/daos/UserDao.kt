@@ -1,12 +1,10 @@
 package com.example.productpickingdemo.data_base.daos
 
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.example.productpickingdemo.data_base.entities.Product
 import com.example.productpickingdemo.data_base.entities.User
 
+@Dao
 interface UserDao {
     @Query("SELECT * FROM users")
     fun getAll(): List<Product?>?

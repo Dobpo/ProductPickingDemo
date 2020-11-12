@@ -6,7 +6,7 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = "products", foreignKeys = [
+    tableName = "products"/*, foreignKeys = [
         ForeignKey(
             entity = Order::class,
             parentColumns = arrayOf("id"),
@@ -19,7 +19,7 @@ import androidx.room.PrimaryKey
             childColumns = arrayOf("locationId"),
             onDelete = ForeignKey.CASCADE
         )
-    ]
+    ]*/
 )
 data class Product(
     @PrimaryKey(autoGenerate = true) val id: Int,
