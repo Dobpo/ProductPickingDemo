@@ -4,30 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_centerInParent="true"
     tools:ignore="ContentDescription">
 
-    <ImageView
-        android:id="@+id/ivScanQr"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_qr_code_small"
+    <TextView
+        android:id="@+id/tvMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="80dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintVertical_bias="0.3"
+        tools:text="Unload The Products of order AF536?" />
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
-        android:layout_marginHorizontal="80dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/click_to_scan_shipping_area_code"
-        android:textSize="22sp"
-        app:layout_constraintTop_toBottomOf="@+id/ivScanQr" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginHorizontal="16dp"
+        android:text="@string/confirm_unloading"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.9"
+        app:layout_constraintTop_toBottomOf="@+id/tvMessage" />
 </androidx.constraintlayout.widget.ConstraintLayout>
