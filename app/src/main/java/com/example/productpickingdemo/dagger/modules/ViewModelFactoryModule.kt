@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.productpickingdemo.base.view_model.DaggerViewModelFactory
 import com.example.productpickingdemo.dagger.ViewModelKey
 import com.example.productpickingdemo.dagger.scopes.FragmentScope
+import com.example.productpickingdemo.screens.confirm_unload.ConfirmUnloadViewModel
 import com.example.productpickingdemo.screens.login_fragment.LoginViewModel
 import com.example.productpickingdemo.screens.orders_fragment.OrderViewModel
 import dagger.Binds
@@ -28,4 +29,10 @@ abstract class ViewModelFactoryModule {
     @FragmentScope
     @ViewModelKey(OrderViewModel::class)
     internal abstract fun bindOrderViewModel(viewModel: OrderViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @FragmentScope
+    @ViewModelKey(ConfirmUnloadViewModel::class)
+    internal abstract fun bindConfirmUnloadViewModel(viewModel: ConfirmUnloadViewModel): ViewModel
 }

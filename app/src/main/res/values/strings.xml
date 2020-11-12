@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ProductPickingDemo</string>
+    <string name="click_to_scan_shipping_area_code">Click to scan Shipping Area code</string>
 </resources>
