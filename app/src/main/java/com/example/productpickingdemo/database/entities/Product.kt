@@ -32,4 +32,4 @@ data class Product(
     @ColumnInfo(name = "barcode") val barcode: String?,
     @ColumnInfo(name = "request_quantity") val requestQuantity: Int?,
     @ColumnInfo(name = "actual_quantity") val actualQuantity: Int?
-): Parcelable
+) : Parcelable
