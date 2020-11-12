@@ -16,22 +16,26 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
         return R.layout.fragment_login
     }
 
-    val code = 777
+    companion object {
+        const val REQUEST_CODE = 777
+    }
+
     override fun provideViewModel(viewModelFactory: ViewModelProvider.Factory): LoginViewModel {
         return injectViewModel(viewModelFactory)
     }
 
     override fun initialization(view: View, isFirstInit: Boolean) {
-
-        btnSubmit.setOnClickListener {
-            startActivityForResult(Intent(context, CaptureActivity::class.java), code)
-
+        btnLogin.setOnClickListener {
+            navController.navigate(LoginFragmentDirections.actionLoginFragmentToOrdersFragment())
+        }
+        ivQrCode.setOnClickListener {
+            startActivityForResult(Intent(context, CaptureActivity::class.java), REQUEST_CODE)
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == 777) {
-            val result = data?.getStringExtra(KEY_RESULT)
+            val result = data?.getStringExtra(KEY_RESULT) ?: "Cancelled"
             Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
         } else {
             super.onActivityResult(requestCode, resultCode, data);

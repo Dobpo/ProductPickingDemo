@@ -6,6 +6,8 @@ import com.example.productpickingdemo.base.view_model.DaggerViewModelFactory
 import com.example.productpickingdemo.dagger.ViewModelKey
 import com.example.productpickingdemo.dagger.scopes.FragmentScope
 import com.example.productpickingdemo.screens.confirm_unload.ConfirmUnloadViewModel
+import com.example.productpickingdemo.screens.location.LocationFragment
+import com.example.productpickingdemo.screens.location.LocationViewModel
 import com.example.productpickingdemo.screens.login.LoginViewModel
 import com.example.productpickingdemo.screens.orders.OrderViewModel
 import com.example.productpickingdemo.screens.scan_shopping_area.ScanShoppingAreaViewModel
@@ -42,4 +44,10 @@ abstract class ViewModelFactoryModule {
     @FragmentScope
     @ViewModelKey(ConfirmUnloadViewModel::class)
     internal abstract fun bindConfirmUnloadViewModel(viewModel: ConfirmUnloadViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @FragmentScope
+    @ViewModelKey(LocationViewModel::class)
+    internal abstract fun bindLocationViewModel(viewModel: LocationViewModel): ViewModel
 }

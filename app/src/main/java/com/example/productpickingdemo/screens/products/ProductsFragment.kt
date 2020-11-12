@@ -1,7 +1,6 @@
 package com.example.productpickingdemo.screens.products
 
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.productpickingdemo.R
@@ -54,7 +53,9 @@ class ProductsFragment : BaseFragment<OrderViewModel>() {
         rvProducts.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = ProductsAdapter(ordersList, onClick = {
-                Toast.makeText(context, it.name, Toast.LENGTH_LONG).show()
+                navController.navigate(
+                    ProductsFragmentDirections.actionProductsFragmentToLocationFragment(order!!,it)
+                )
             })
         }
     }

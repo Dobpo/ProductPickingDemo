@@ -77,6 +77,8 @@
             android:background="@drawable/border">
 
             <TextView
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="1dp"
                 android:background="@drawable/border"
                 android:gravity="center"
                 android:paddingVertical="16dp"
@@ -86,6 +88,8 @@
 
             <TextView
                 android:id="@+id/tvValueRow"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="0.5dp"
                 android:background="@drawable/border"
                 android:gravity="center"
                 android:paddingVertical="16dp"
@@ -100,6 +104,7 @@
             android:background="@drawable/border">
 
             <TextView
+                android:layout_marginStart="1dp"
                 android:background="@drawable/border"
                 android:gravity="center"
                 android:paddingVertical="16dp"
@@ -109,6 +114,7 @@
 
             <TextView
                 android:id="@+id/tvValueColumn"
+                android:layout_marginEnd="0.5dp"
                 android:background="@drawable/border"
                 android:gravity="center"
                 android:paddingVertical="16dp"
@@ -122,6 +128,8 @@
             android:background="@drawable/border">
 
             <TextView
+                android:layout_marginStart="1dp"
+                android:layout_marginBottom="1dp"
                 android:background="@drawable/border"
                 android:gravity="center"
                 android:paddingVertical="16dp"
@@ -131,6 +139,8 @@
 
             <TextView
                 android:id="@+id/tvValueShelf"
+                android:layout_marginEnd="0.5dp"
+                android:layout_marginBottom="1dp"
                 android:background="@drawable/border"
                 android:gravity="center"
                 android:paddingVertical="16dp"
@@ -159,7 +169,7 @@
         android:id="@+id/ivScan"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="160dp"
         android:src="@drawable/ic_qr_code_small"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -184,19 +194,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="(can be row, Column or\n shelf)"
+        android:text="(can be row, column or\n shelf)"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitleText" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnFinish"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="Move to shelf"
-        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
