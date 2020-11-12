@@ -24,8 +24,8 @@ import androidx.room.PrimaryKey
 data class Product(
     @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo(name = "order_id") val orderId: Int?,
-    @ColumnInfo(name = "location_id") val locationId: String?,
-    @ColumnInfo(name = "name") val name: Int?,
+    @ColumnInfo(name = "location_id") val locationId: Int?,
+    @ColumnInfo(name = "name") val name: String?,
     @ColumnInfo(name = "barcode") val barcode: String?,
     @ColumnInfo(name = "request_quantity") val requestQuantity: Int?,
     @ColumnInfo(name = "actual_quantity") val actualQuantity: Int?

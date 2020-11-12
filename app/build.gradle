@@ -58,12 +58,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
 
     //Room
-    implementation "androidx.room:room-runtime:2.2.5"
-    kapt "androidx.room:room-compiler:2.2.5"
-
-    //implementation "android.arch.persistence.room:runtime:1.1.1"
-    //annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
-    //kapt 'android.arch.persistence.room:compiler:1.1.1'
+    def roomVersion = "2.2.5"
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
 
     //Coroutines
     def coroutinesVersion = "1.4.1"

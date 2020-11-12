@@ -19,10 +19,10 @@
 
     <style name="TextInputStyle" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="android:textColorHint">@color/grayText</item>
-        <item name="hintTextColor">@color/teal_700</item>
+        <item name="hintTextColor">@color/purple_700</item>
         <item name="boxBackgroundColor">@android:color/transparent</item>
         <item name="strokeWidth">2dp</item>
-        <item name="boxStrokeColor">@color/teal_700</item>
+        <item name="boxStrokeColor">@color/purple_700</item>
         <item name="materialThemeOverlay">@style/EditTextOverlay</item>
     </style>
 
