@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/grayBackground"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/grayBackground">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:animateLayoutChanges="true"
+        android:background="@color/white"
         android:clickable="true"
         android:elevation="4dp"
-        android:background="@color/white"
         android:focusable="true"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -29,26 +29,46 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:textStyle="bold"
-            android:text="Order List"
+            android:text="Product List"
             android:textColor="@color/black"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_goneMarginStart="16dp" />
+
+        <TextView
+            android:id="@+id/tvOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:clickable="false"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="in order AF536"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            app:layout_goneMarginStart="16dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvOrders"
+        android:id="@+id/rvProducts"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:clipToPadding="false"
         android:layout_marginVertical="4dp"
-
+        android:clipToPadding="false"
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:listitem="@layout/order_item" />
+        tools:listitem="@layout/product_item" />
 </androidx.constraintlayout.widget.ConstraintLayout>
