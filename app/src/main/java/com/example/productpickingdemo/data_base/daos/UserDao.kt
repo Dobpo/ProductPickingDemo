@@ -7,7 +7,7 @@ import com.example.productpickingdemo.data_base.entities.User
 @Dao
 interface UserDao {
     @Query("SELECT * FROM users")
-    fun getAll(): List<Product?>?
+    fun getAll(): List<User?>?
 
     @Query("SELECT * FROM users WHERE id = :id")
     fun getById(id: Long): User?
