@@ -9,7 +9,7 @@ plugins {
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.1"
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "com.example.productpickingdemo"
@@ -79,4 +79,6 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
     implementation "com.google.dagger:dagger-android:$daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+
+    implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
 }
