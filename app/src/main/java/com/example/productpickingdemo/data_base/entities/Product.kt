@@ -1,9 +1,11 @@
 package com.example.productpickingdemo.data_base.entities
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
 @Entity(
     tableName = "products", foreignKeys = [
@@ -21,6 +23,7 @@ import androidx.room.PrimaryKey
         )
     ]
 )
+@Parcelize
 data class Product(
     @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo(name = "order_id") val orderId: Int?,
@@ -29,4 +32,4 @@ data class Product(
     @ColumnInfo(name = "barcode") val barcode: String?,
     @ColumnInfo(name = "request_quantity") val requestQuantity: Int?,
     @ColumnInfo(name = "actual_quantity") val actualQuantity: Int?
-)
+): Parcelable

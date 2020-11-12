@@ -3,6 +3,7 @@ package com.example.productpickingdemo
 import android.app.Activity
 import android.app.Application
 import android.content.Context
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.productpickingdemo.dagger.components.AppComponent
 import com.example.productpickingdemo.dagger.components.DaggerAppComponent
 import com.example.productpickingdemo.dagger.modules.AppModule
@@ -31,4 +32,10 @@ class App : Application() {
             .qrModule(QrModule(this))
             .databaseModule(DatabaseModule(this))
             .build()
+
+    override fun onCreate() {
+        super.onCreate()
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
+    }
 }

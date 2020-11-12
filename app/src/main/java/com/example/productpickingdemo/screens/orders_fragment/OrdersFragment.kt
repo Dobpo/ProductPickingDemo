@@ -53,17 +53,20 @@ class OrdersFragment : BaseFragment<OrderViewModel>() {
         ordersList.add(Order(29, 562142, "test", "test"))
         ordersList.add(Order(30, 14512, "test", "test"))
 
-        rvOrders.apply {
-            layoutManager = LinearLayoutManager(activity)
-            adapter = OrdersAdapter(ordersList, onClick = {
-                navController.navigate(
-                    OrdersFragmentDirections.actionOrdersFragmentToProductsFragment(
-                        it
+        if (ordersList.isEmpty()) {
+            tvNoOrders.visibility = View.VISIBLE
+            rvOrders.visibility = View.GONE
+        } else {
+            tvNoOrders.visibility = View.GONE
+            rvOrders.visibility = View.VISIBLE
+            rvOrders.apply {
+                layoutManager = LinearLayoutManager(activity)
+                adapter = OrdersAdapter(ordersList, onClick = {
+                    navController.navigate(
+                        OrdersFragmentDirections.actionOrdersFragmentToProductsFragment(it)
                     )
-                )
-
-            })
+                })
+            }
         }
-
     }
 }
