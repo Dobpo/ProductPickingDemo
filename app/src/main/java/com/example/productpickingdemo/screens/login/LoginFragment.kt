@@ -1,4 +1,4 @@
-package com.example.productpickingdemo.screens.login_fragment
+package com.example.productpickingdemo.screens.login
 
 import android.view.View
 import androidx.lifecycle.ViewModelProvider

@@ -1,4 +1,4 @@
-package com.example.productpickingdemo.data_base
+package com.example.productpickingdemo.database
 
 interface AppDatabase {
     fun getProducts(): String

@@ -1,4 +1,4 @@
-package com.example.productpickingdemo.data_base.entities
+package com.example.productpickingdemo.database.entities
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo

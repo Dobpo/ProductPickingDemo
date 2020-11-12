@@ -1,4 +1,4 @@
-package com.example.productpickingdemo.data_base.entities
+package com.example.productpickingdemo.database.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

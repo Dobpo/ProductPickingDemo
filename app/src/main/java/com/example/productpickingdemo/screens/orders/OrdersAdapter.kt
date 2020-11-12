@@ -1,11 +1,11 @@
-package com.example.productpickingdemo.screens.orders_fragment
+package com.example.productpickingdemo.screens.orders
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.productpickingdemo.R
-import com.example.productpickingdemo.data_base.entities.Order
+import com.example.productpickingdemo.database.entities.Order
 
 class OrdersAdapter(
     private val ordersList: ArrayList<Order>,
@@ -17,7 +17,7 @@ class OrdersAdapter(
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.order_item, parent, false)
 
-        return OrdersViewHolder(view).listen { pos, type ->
+        return OrdersViewHolder(view).listen { pos, _ ->
             val item = ordersList[pos]
             onClick(item)
         }

@@ -1,4 +1,4 @@
-package com.example.productpickingdemo.screens.orders_fragment
+package com.example.productpickingdemo.screens.orders
 
 import android.view.View
 import android.widget.TextView
@@ -9,6 +9,6 @@ class OrdersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     var textView: TextView? = null
 
     init {
-        textView= view.tvOrderId
+        textView = view.tvOrderId
     }
 }

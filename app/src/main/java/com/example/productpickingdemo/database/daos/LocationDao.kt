@@ -1,8 +1,8 @@
-package com.example.productpickingdemo.data_base.daos
+package com.example.productpickingdemo.database.daos
 
 import androidx.room.*
 
-import com.example.productpickingdemo.data_base.entities.Location
+import com.example.productpickingdemo.database.entities.Location
 
 @Dao
 interface LocationDao {

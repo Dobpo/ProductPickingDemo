@@ -3,7 +3,7 @@ package com.example.productpickingdemo.base.view_model
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import com.example.productpickingdemo.App
-import com.example.productpickingdemo.data_base.AppDatabase
+import com.example.productpickingdemo.database.AppDatabase
 import com.example.productpickingdemo.qr.QrScannerManager
 import javax.inject.Inject
 

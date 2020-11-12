@@ -1,10 +1,9 @@
-package com.example.productpickingdemo.screens.location_fragment
+package com.example.productpickingdemo.screens.location
 
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.example.productpickingdemo.R
 import com.example.productpickingdemo.base.BaseFragment
-import com.example.productpickingdemo.screens.orders_fragment.OrderViewModel
 import com.example.productpickingdemo.utils.injectViewModel
 
 class LocationFragment : BaseFragment<LocationViewModel>() {
@@ -17,7 +16,5 @@ class LocationFragment : BaseFragment<LocationViewModel>() {
     }
 
     override fun initialization(view: View, isFirstInit: Boolean) {
-
     }
-
 }

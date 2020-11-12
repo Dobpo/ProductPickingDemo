@@ -6,8 +6,8 @@ import com.example.productpickingdemo.base.view_model.DaggerViewModelFactory
 import com.example.productpickingdemo.dagger.ViewModelKey
 import com.example.productpickingdemo.dagger.scopes.FragmentScope
 import com.example.productpickingdemo.screens.confirm_unload.ConfirmUnloadViewModel
-import com.example.productpickingdemo.screens.login_fragment.LoginViewModel
-import com.example.productpickingdemo.screens.orders_fragment.OrderViewModel
+import com.example.productpickingdemo.screens.login.LoginViewModel
+import com.example.productpickingdemo.screens.orders.OrderViewModel
 import com.example.productpickingdemo.screens.scan_shopping_area.ScanShoppingAreaViewModel
 import dagger.Binds
 import dagger.Module

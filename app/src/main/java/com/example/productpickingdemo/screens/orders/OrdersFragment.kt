@@ -1,11 +1,11 @@
-package com.example.productpickingdemo.screens.orders_fragment
+package com.example.productpickingdemo.screens.orders
 
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.productpickingdemo.R
 import com.example.productpickingdemo.base.BaseFragment
-import com.example.productpickingdemo.data_base.entities.Order
+import com.example.productpickingdemo.database.entities.Order
 import com.example.productpickingdemo.utils.injectViewModel
 import kotlinx.android.synthetic.main.fragment_orders.*
 

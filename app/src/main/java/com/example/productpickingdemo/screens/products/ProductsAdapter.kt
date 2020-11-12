@@ -1,11 +1,11 @@
-package com.example.productpickingdemo.screens.products_fragment
+package com.example.productpickingdemo.screens.products
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.productpickingdemo.R
-import com.example.productpickingdemo.data_base.entities.Product
+import com.example.productpickingdemo.database.entities.Product
 
 class ProductsAdapter(
     private val productsList: ArrayList<Product>,

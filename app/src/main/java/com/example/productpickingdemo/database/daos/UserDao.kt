@@ -1,8 +1,7 @@
-package com.example.productpickingdemo.data_base.daos
+package com.example.productpickingdemo.database.daos
 
 import androidx.room.*
-import com.example.productpickingdemo.data_base.entities.Product
-import com.example.productpickingdemo.data_base.entities.User
+import com.example.productpickingdemo.database.entities.User
 
 @Dao
 interface UserDao {
