@@ -28,8 +28,8 @@ class LocationFragment : BaseFragment<LocationViewModel>() {
     }
 
     override fun initialization(view: View, isFirstInit: Boolean) {
-        val order: Order = arguments?.let { LocationFragmentArgs.fromBundle(it).order }!!
-        val product: Product = arguments?.let { LocationFragmentArgs.fromBundle(it).product }!!
+       order = arguments?.let { LocationFragmentArgs.fromBundle(it).order }!!
+       product = arguments?.let { LocationFragmentArgs.fromBundle(it).product }!!
 
         val title = "Product ${product.name} in order ${order.number}"
         tvTitle.text = title

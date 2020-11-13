@@ -14,4 +14,5 @@ interface AppDatabase {
     suspend fun deleteProduct(product: Product)
     suspend fun deleteOrder(order: Order)
     suspend fun getUser(id: Int): User
+    suspend fun getUsers(): List<User>
 }
