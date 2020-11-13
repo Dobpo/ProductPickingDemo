@@ -8,8 +8,11 @@ interface ProductDao {
     @Query("SELECT * FROM products")
     suspend fun getAll(): List<Product>
 
-    @Query("SELECT * FROM products WHERE id = :id")
-    suspend fun getById(id: Long): Product
+    @Query("SELECT * FROM products WHERE order_id = :order_id")
+    suspend fun getById(order_id: Int): List<Product>
+
+    @Query("DELETE FROM products")
+    suspend fun clearData()
 
     @Insert
     suspend fun insert(product: Product)

@@ -11,6 +11,9 @@ interface OrderDao {
     @Query("SELECT * FROM orders WHERE id = :id")
     suspend fun getById(id: Long): Order
 
+    @Query("DELETE FROM orders")
+    suspend fun clearData()
+
     @Insert
     suspend fun insert(order: Order)
 

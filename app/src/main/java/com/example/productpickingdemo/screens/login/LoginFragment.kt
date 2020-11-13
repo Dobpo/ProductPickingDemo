@@ -66,14 +66,9 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
         if (requestCode == QR_REQUEST_CODE) {
             val result = data?.getStringExtra(KEY_RESULT) ?: "Cancelled"
             Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
-            //initDB(result)
+            viewModel.initDatabase()
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
-    }
-
-    private fun initDB(code: String) {
-        if (code.contains("7622100815273"))
-            viewModel.initDatabase()
     }
 }

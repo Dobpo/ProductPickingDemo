@@ -6,9 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_product.view.*
 
 class ProductsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    var textView: TextView? = null
+    var tvProductName: TextView? = null
+    var tvProductCode: TextView? = null
 
     init {
-        textView = view.tvProductName
+        tvProductName = view.tvProductName
+        tvProductCode = view.tvProductCode
     }
 }

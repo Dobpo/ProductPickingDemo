@@ -12,53 +12,26 @@
         android:layout_height="wrap_content"
         android:animateLayoutChanges="true"
         android:background="@color/white"
-        android:clickable="true"
         android:elevation="4dp"
-        android:focusable="true"
+        android:padding="16dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:clickable="false"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxLines="1"
-            android:text="Product List"
+            android:layout_marginHorizontal="16dp"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_goneMarginStart="16dp" />
-
-        <TextView
-            android:id="@+id/tvOrder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:clickable="false"
-            android:ellipsize="end"
             android:gravity="center"
-            android:maxLines="1"
-            android:text="in order AF536"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:singleLine="true"
+            android:ellipsize="end"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-            app:layout_goneMarginStart="16dp" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Product List in order  20201112005" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -67,10 +40,10 @@
         android:layout_height="0dp"
         android:layout_marginVertical="4dp"
         android:clipToPadding="false"
+        android:paddingBottom="8dp"
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@+id/btnFinish"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        android:paddingBottom="8dp"
         tools:listitem="@layout/item_product" />
 
     <com.google.android.material.button.MaterialButton
@@ -78,9 +51,8 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_marginHorizontal="16dp"
-        android:text="Finish packaging"
         android:layout_marginBottom="16dp"
+        android:text="Finish packaging"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvProducts"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/rvProducts" />
 </androidx.constraintlayout.widget.ConstraintLayout>
