@@ -9,7 +9,7 @@ import com.example.productpickingdemo.database.entities.User
 interface AppDatabase {
     suspend fun initDatabase()
     suspend fun getOrders(): List<Order>
-    suspend fun getProducts(orderId: Int): List<Product>
+     fun getProducts(orderId: Int): LiveData<List<Product>>
     suspend fun getLocation(id: Int): Location
     suspend fun updateProduct(product: Product)
     suspend fun deleteProduct(product: Product)

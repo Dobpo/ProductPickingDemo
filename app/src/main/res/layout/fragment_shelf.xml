@@ -148,7 +148,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etProductCount"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
@@ -185,6 +186,17 @@
         app:constraint_referenced_ids="tvRequired,tvPicked" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnNoMore"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_margin="16dp"
+        android:text="No More"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSubmit"
         android:layout_width="0dp"
         android:layout_height="64dp"
@@ -192,5 +204,12 @@
         android:text="@string/ok"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

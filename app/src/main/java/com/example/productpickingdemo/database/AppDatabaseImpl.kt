@@ -34,7 +34,7 @@ class AppDatabaseImpl @Inject constructor(
         return orderDao.getAll()
     }
 
-    override suspend fun getProducts(orderId: Int): List<Product> {
+    override fun getProducts(orderId: Int): LiveData<List<Product>> {
         return productDao.getById(orderId)
     }
 

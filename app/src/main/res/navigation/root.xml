@@ -48,6 +48,13 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_productsFragment_to_scanShoppingAreaFragment"
+            app:destination="@id/scanShoppingAreaFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 
     <fragment
@@ -75,6 +82,9 @@
         android:name="com.example.productpickingdemo.screens.shopping_area.ShoppingAreaFragment"
         android:label="ScanShoppingAreaFragment"
         tools:layout="@layout/fragment_scan_shopping_area">
+        <argument
+            android:name="order"
+            app:argType="com.example.productpickingdemo.database.entities.Order" />
         <action
             android:id="@+id/action_scanShoppingAreaFragment_to_ordersFragment"
             app:destination="@id/ordersFragment"
@@ -89,6 +99,12 @@
         android:name="com.example.productpickingdemo.screens.shelf.ShelfFragment"
         android:label="ShelfFragment"
         tools:layout="@layout/fragment_shelf">
+        <argument
+            android:name="order"
+            app:argType="com.example.productpickingdemo.database.entities.Order" />
+        <argument
+            android:name="product"
+            app:argType="com.example.productpickingdemo.database.entities.Product" />
         <action
             android:id="@+id/action_shelfFragment_to_scanShoppingAreaFragment"
             app:destination="@id/scanShoppingAreaFragment"
@@ -96,5 +112,14 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_shelfFragment_to_productsFragment"
+            app:destination="@id/productsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/productsFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
