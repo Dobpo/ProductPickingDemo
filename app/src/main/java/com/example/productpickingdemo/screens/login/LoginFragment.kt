@@ -78,7 +78,7 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
             if (result != null && result.isNotEmpty()) {
                 try {
                     val user = Gson().fromJson(result, User::class.java)
-                    checkUser(user)
+                    checkUser(user.name!!, user.password!!)
                 } catch (e: Exception) {
                     Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
                     return
@@ -91,19 +91,9 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
         }
     }
 
-    private fun checkUser(user: User) {
+    private fun checkUser(name: String, password: String) {
         users.forEach {
-            if (it.id == user.id && it.password == user.password) {
-                navController.navigate(LoginFragmentDirections.actionLoginFragmentToOrdersFragment())
-                return
-            }
-        }
-        Toast.makeText(context, "No such user", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun checkUser(id: String, password: String) {
-        users.forEach {
-            if (it.id.toString() == id && it.password == password) {
+            if (it.name == name && it.password == password) {
                 navController.navigate(LoginFragmentDirections.actionLoginFragmentToOrdersFragment())
                 return
             }

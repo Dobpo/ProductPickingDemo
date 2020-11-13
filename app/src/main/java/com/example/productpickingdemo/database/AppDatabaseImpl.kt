@@ -30,7 +30,7 @@ class AppDatabaseImpl @Inject constructor(
         productDao.insertAll(products)
     }
 
-    override suspend fun getOrders(): List<Order> {
+    override fun getOrders(): LiveData<List<Order>> {
         return orderDao.getAll()
     }
 
@@ -38,7 +38,7 @@ class AppDatabaseImpl @Inject constructor(
         return productDao.getById(orderId)
     }
 
-    override suspend fun getLocation(id: Int): Location {
+    override fun getLocation(id: Int): LiveData<Location> {
         return locationDao.getById(id)
     }
 

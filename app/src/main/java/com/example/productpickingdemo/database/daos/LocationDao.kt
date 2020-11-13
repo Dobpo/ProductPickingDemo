@@ -1,5 +1,6 @@
 package com.example.productpickingdemo.database.daos
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 import com.example.productpickingdemo.database.entities.Location
@@ -7,10 +8,10 @@ import com.example.productpickingdemo.database.entities.Location
 @Dao
 interface LocationDao {
     @Query("SELECT * FROM locations")
-    suspend fun getAll(): List<Location>
+    fun getAll(): LiveData<List<Location>>
 
     @Query("SELECT * FROM locations WHERE id = :id")
-    suspend fun getById(id: Int): Location
+    fun getById(id: Int): LiveData<Location>
 
     @Query("DELETE FROM locations")
     suspend fun clearData()
