@@ -31,7 +31,7 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
     }
 
     override fun initialization(view: View, isFirstInit: Boolean) {
-        //viewModel.initDatabase()
+        viewModel.initDatabase()
 
         btnLogin.setOnClickListener {
             navController.navigate(LoginFragmentDirections.actionLoginFragmentToOrdersFragment())

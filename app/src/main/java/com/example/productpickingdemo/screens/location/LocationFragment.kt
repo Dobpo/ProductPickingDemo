@@ -3,6 +3,7 @@ package com.example.productpickingdemo.screens.location
 import android.content.Intent
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.productpickingdemo.R
 import com.example.productpickingdemo.base.BaseFragment
@@ -28,13 +29,13 @@ class LocationFragment : BaseFragment<LocationViewModel>() {
     }
 
     override fun initialization(view: View, isFirstInit: Boolean) {
-        val order: Order = arguments?.let { LocationFragmentArgs.fromBundle(it).order }!!
-        val product: Product = arguments?.let { LocationFragmentArgs.fromBundle(it).product }!!
+        order = arguments?.let { LocationFragmentArgs.fromBundle(it).order }!!
+        product = arguments?.let { LocationFragmentArgs.fromBundle(it).product }!!
 
         val title = "Product ${product.name} in order ${order.number}"
         tvTitle.text = title
 
-        viewModel.locationLiveData.observe(viewLifecycleOwner, {
+        viewModel.locationLiveData.observe(viewLifecycleOwner, Observer {
             tvValueRow.text = it.row
             tvValueColumn.text = it.column
             tvValueShelf.text = it.shelf
@@ -49,11 +50,6 @@ class LocationFragment : BaseFragment<LocationViewModel>() {
                 Intent(context, CaptureActivity::class.java),
                 QR_REQUEST_CODE
             )
-        }
-
-        ivScan.setOnLongClickListener {
-            navController.navigate(LocationFragmentDirections.actionLocationFragmentToShelfFragment())
-            false
         }
     }
 
@@ -84,7 +80,12 @@ class LocationFragment : BaseFragment<LocationViewModel>() {
                 "Correct row",
                 Toast.LENGTH_SHORT
             ).show()
-            location.shelfBarcode -> navController.navigate(LocationFragmentDirections.actionLocationFragmentToShelfFragment())
+            location.shelfBarcode -> navController.navigate(
+                LocationFragmentDirections.actionLocationFragmentToShelfFragment(
+                    order,
+                    product
+                )
+            )
             else -> Toast.makeText(
                 context,
                 "Wrong location",
