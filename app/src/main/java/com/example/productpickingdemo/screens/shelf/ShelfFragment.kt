@@ -3,10 +3,12 @@ package com.example.productpickingdemo.screens.shelf
 import android.Manifest
 import android.content.DialogInterface
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.example.productpickingdemo.R
 import com.example.productpickingdemo.base.BaseFragment
 import com.example.productpickingdemo.database.entities.Order
@@ -90,19 +92,49 @@ class ShelfFragment : BaseFragment<ShelfViewModel>() {
                 }).check()
         }
 
+
         btnSubmit.setOnClickListener {
-            AlertDialog.Builder(requireContext())
-                .setMessage("All Products Picked from Order ${order.id}")
-                .setNegativeButton("No") { dialog: DialogInterface, _: Int -> dialog.dismiss() }
-                .setPositiveButton("Yes") { dialog: DialogInterface, _: Int ->
-                    dialog.dismiss()
-                    navController.navigate(
-                        ShelfFragmentDirections.actionShelfFragmentToScanShoppingAreaFragment(
-                            order
-                        )
-                    )
-                }
-                .show()
+            var productCount: Int? = null
+
+            viewModel.getProducts(order.id).observe(this) {
+
+                productCount = it.size
+                Log.d("myLogs", "count  - $productCount")
+                val title = if (productCount!! > 1)
+                    "End of picking product ${product.name}"
+                else
+                    "All Products Picked from Order ${order.id}"
+                AlertDialog.Builder(requireContext())
+                    .setMessage(title)
+                    .setNegativeButton("No") { dialog: DialogInterface, _: Int -> dialog.dismiss() }
+                    .setPositiveButton("Yes") { dialog: DialogInterface, _: Int ->
+                        dialog.dismiss()
+                        if (productCount!! > 1) {
+                            if (product.requestQuantity == pikedCounterUnit)
+                                viewModel.deleteProduct(product)
+                            else
+                                navController.navigate(
+                                    ShelfFragmentDirections.actionShelfFragmentToProductsFragment(
+                                        order
+                                    )
+                                )
+
+                            viewModel.deleteProductLiveData.observe(this){
+                                navController.navigate(
+                                    ShelfFragmentDirections.actionShelfFragmentToProductsFragment(
+                                        order
+                                    )
+                                )
+                            }
+                        } else
+                            navController.navigate(
+                                ShelfFragmentDirections.actionShelfFragmentToScanShoppingAreaFragment(
+                                    order
+                                )
+                            )
+                    }
+                    .show()
+            }
         }
 
         btnNoMore.setOnClickListener {

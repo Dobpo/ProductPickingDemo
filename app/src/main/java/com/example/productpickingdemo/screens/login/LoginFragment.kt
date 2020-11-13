@@ -2,8 +2,10 @@ package com.example.productpickingdemo.screens.login
 
 import android.Manifest
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.productpickingdemo.R
 import com.example.productpickingdemo.base.BaseFragment
@@ -35,14 +37,15 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
     override fun initialization(view: View, isFirstInit: Boolean) {
         viewModel.initDatabase()
 
-        viewModel.usersLiveData.observe(viewLifecycleOwner, {
+        viewModel.usersLiveData.observe(viewLifecycleOwner, Observer{
             users = it
         })
 
-        viewModel.getUsers()
 
         btnLogin.setOnClickListener {
-            checkUser(etLogin.text.toString(), etPassword.text.toString())
+            navController.navigate(LoginFragmentDirections.actionLoginFragmentToOrdersFragment())
+
+//            checkUser(etLogin.text.toString(), etPassword.text.toString())
         }
 
         ivQrCode.setOnClickListener {
@@ -79,7 +82,9 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
             if (result != null && result.isNotEmpty()) {
                 try {
                     val user = Gson().fromJson(result, User::class.java)
-                    checkUser(user)
+
+//                    checkUser(user)
+                    navController.navigate(LoginFragmentDirections.actionLoginFragmentToOrdersFragment())
                 } catch (e: Exception) {
                     Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
                     return

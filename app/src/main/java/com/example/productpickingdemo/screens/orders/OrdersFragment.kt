@@ -1,6 +1,7 @@
 package com.example.productpickingdemo.screens.orders
 
 import android.view.View
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.productpickingdemo.R
@@ -19,7 +20,7 @@ class OrdersFragment : BaseFragment<OrderViewModel>() {
     }
 
     override fun initialization(view: View, isFirstInit: Boolean) {
-        viewModel.ordersLiveData.observe(viewLifecycleOwner, {
+        viewModel.ordersLiveData.observe(viewLifecycleOwner, Observer{
             showOrders(it)
         })
 

@@ -5,6 +5,7 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.productpickingdemo.R
 import com.example.productpickingdemo.base.BaseFragment
@@ -41,11 +42,10 @@ class ProductsFragment : BaseFragment<ProductsViewModel>() {
             adapter = this@ProductsFragment.adapter
         }
 
-        viewModel.productsLiveData.observe(viewLifecycleOwner, Observer {
-            adapter.setItems(it)
-        })
 
-        viewModel.getProducts(order.id)
+        viewModel.getProducts(order.id).observe(viewLifecycleOwner) {
+            adapter.setItems(it)
+        }
 
         btnFinish.setOnClickListener {
             AlertDialog.Builder(requireContext())

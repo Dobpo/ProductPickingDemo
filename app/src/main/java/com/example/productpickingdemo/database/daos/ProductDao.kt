@@ -1,5 +1,6 @@
 package com.example.productpickingdemo.database.daos
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.productpickingdemo.database.entities.Product
 
@@ -9,7 +10,7 @@ interface ProductDao {
     suspend fun getAll(): List<Product>
 
     @Query("SELECT * FROM products WHERE order_id = :order_id")
-    suspend fun getById(order_id: Int): List<Product>
+    fun getById(order_id: Int): LiveData<List<Product>>
 
     @Query("DELETE FROM products")
     suspend fun clearData()

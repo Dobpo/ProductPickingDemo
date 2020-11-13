@@ -1,5 +1,6 @@
 package com.example.productpickingdemo.database
 
+import androidx.lifecycle.LiveData
 import com.example.productpickingdemo.database.daos.LocationDao
 import com.example.productpickingdemo.database.daos.OrderDao
 import com.example.productpickingdemo.database.daos.ProductDao
@@ -33,7 +34,7 @@ class AppDatabaseImpl @Inject constructor(
         return orderDao.getAll()
     }
 
-    override suspend fun getProducts(orderId: Int): List<Product> {
+    override fun getProducts(orderId: Int): LiveData<List<Product>> {
         return productDao.getById(orderId)
     }
 
