@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.productpickingdemo.R
 import com.example.productpickingdemo.base.BaseFragment
-import com.example.productpickingdemo.models.UserModel
+import com.example.productpickingdemo.database.entities.User
 import com.example.productpickingdemo.utils.QR_REQUEST_CODE
 import com.example.productpickingdemo.utils.injectViewModel
 import com.google.gson.Gson
@@ -26,6 +26,8 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
         return R.layout.fragment_login
     }
 
+    private lateinit var users: List<User>
+
     override fun provideViewModel(viewModelFactory: ViewModelProvider.Factory): LoginViewModel {
         return injectViewModel(viewModelFactory)
     }
@@ -33,8 +35,14 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
     override fun initialization(view: View, isFirstInit: Boolean) {
         viewModel.initDatabase()
 
+        viewModel.usersLiveData.observe(viewLifecycleOwner, {
+            users = it
+        })
+
+        viewModel.getUsers()
+
         btnLogin.setOnClickListener {
-            navController.navigate(LoginFragmentDirections.actionLoginFragmentToOrdersFragment())
+            checkUser(etLogin.text.toString(), etPassword.text.toString())
         }
 
         ivQrCode.setOnClickListener {
@@ -69,12 +77,9 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
         if (requestCode == QR_REQUEST_CODE) {
             val result = data?.getStringExtra(KEY_RESULT)
             if (result != null && result.isNotEmpty()) {
-                val user: UserModel
-
                 try {
-                    user = Gson().fromJson(result, UserModel::class.java)
-                    Toast.makeText(context, "${user.id} - ${user.password}", Toast.LENGTH_SHORT)
-                        .show()
+                    val user = Gson().fromJson(result, User::class.java)
+                    checkUser(user)
                 } catch (e: Exception) {
                     Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
                     return
@@ -85,5 +90,25 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    private fun checkUser(user: User) {
+        users.forEach {
+            if (it.id == user.id && it.password == user.password) {
+                navController.navigate(LoginFragmentDirections.actionLoginFragmentToOrdersFragment())
+                return
+            }
+        }
+        Toast.makeText(context, "No such user", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun checkUser(id: String, password: String) {
+        users.forEach {
+            if (it.id.toString() == id && it.password == password) {
+                navController.navigate(LoginFragmentDirections.actionLoginFragmentToOrdersFragment())
+                return
+            }
+        }
+        Toast.makeText(context, "No such user", Toast.LENGTH_SHORT).show()
     }
 }
