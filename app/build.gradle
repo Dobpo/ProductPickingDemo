@@ -61,13 +61,14 @@ dependencies {
     def roomVersion = "2.2.5"
     implementation "androidx.room:room-runtime:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
 
     //Coroutines
     def coroutinesVersion = "1.4.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
 
-    // Navigation components
+    // Navigation
     def navigationVersion = "2.3.1"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
@@ -81,8 +82,10 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
 
     //Scanner
-    implementation 'com.king.zxing:zxing-lite:1.1.9'
+    def zxingVersion = "1.1.9"
+    implementation "com.king.zxing:zxing-lite:$zxingVersion"
 
     //Dexter
-    implementation 'com.karumi:dexter:6.2.1'
+    def dexterVersion = "6.2.1"
+    implementation "com.karumi:dexter:$dexterVersion"
 }

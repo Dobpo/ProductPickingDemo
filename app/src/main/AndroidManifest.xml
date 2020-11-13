@@ -22,7 +22,6 @@
         <activity
             android:name="com.king.zxing.CaptureActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/CaptureTheme"/>
+            android:theme="@style/CaptureTheme" />
     </application>
-
 </manifest>

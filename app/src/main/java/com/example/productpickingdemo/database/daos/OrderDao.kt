@@ -6,20 +6,20 @@ import com.example.productpickingdemo.database.entities.Order
 @Dao
 interface OrderDao {
     @Query("SELECT * FROM orders")
-    fun getAll(): List<Order?>?
+    suspend fun getAll(): List<Order>
 
     @Query("SELECT * FROM orders WHERE id = :id")
-    fun getById(id: Long): Order?
+    suspend fun getById(id: Long): Order
 
     @Insert
-    fun insert(order: Order?)
+    suspend fun insert(order: Order)
 
     @Insert
-    fun insertAll(orders: List<Order>?)
+    suspend fun insertAll(orders: List<Order>)
 
     @Update
-    fun update(order: Order?)
+    suspend fun update(order: Order)
 
     @Delete
-    fun delete(order: Order?)
+    suspend fun delete(order: Order)
 }

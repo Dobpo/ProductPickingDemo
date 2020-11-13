@@ -7,20 +7,20 @@ import com.example.productpickingdemo.database.entities.Location
 @Dao
 interface LocationDao {
     @Query("SELECT * FROM locations")
-    fun getAll(): List<Location?>?
+    suspend fun getAll(): List<Location>
 
     @Query("SELECT * FROM locations WHERE id = :id")
-    fun getById(id: Long): Location?
+    suspend fun getById(id: Long): Location
 
     @Insert
-    fun insert(location: Location?)
+    suspend fun insert(location: Location)
 
     @Insert
-    fun insertAll(locations: List<Location>?)
+    suspend fun insertAll(locations: List<Location>)
 
     @Update
-    fun update(location: Location?)
+    suspend fun update(location: Location)
 
     @Delete
-    fun delete(location: Location?)
+    suspend fun delete(location: Location)
 }

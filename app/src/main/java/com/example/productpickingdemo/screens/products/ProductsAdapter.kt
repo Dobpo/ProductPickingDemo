@@ -15,7 +15,7 @@ class ProductsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductsViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.product_item, parent, false)
+            .inflate(R.layout.item_product, parent, false)
 
         return ProductsViewHolder(view).listen { pos, _ ->
             val item = productsList[pos]

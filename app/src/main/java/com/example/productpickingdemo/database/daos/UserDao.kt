@@ -6,20 +6,20 @@ import com.example.productpickingdemo.database.entities.User
 @Dao
 interface UserDao {
     @Query("SELECT * FROM users")
-    fun getAll(): List<User?>?
+    suspend fun getAll(): List<User>
 
     @Query("SELECT * FROM users WHERE id = :id")
-    fun getById(id: Long): User?
+    suspend fun getById(id: Long): User
 
     @Insert
-    fun insert(user: User?)
+    suspend fun insert(user: User)
 
     @Insert
-    fun insertAll(users: List<User>?)
+    suspend fun insertAll(users: List<User>)
 
     @Update
-    fun update(user: User?)
+    suspend fun update(user: User)
 
     @Delete
-    fun delete(user: User?)
+    suspend fun delete(user: User)
 }

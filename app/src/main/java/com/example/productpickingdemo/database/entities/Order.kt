@@ -10,7 +10,7 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = "orders")
 data class Order(
     @PrimaryKey(autoGenerate = true) val id: Int,
-    @ColumnInfo(name = "number") val number: Int?,
+    @ColumnInfo(name = "number") val number: Long?,
     @ColumnInfo(name = "date") val date: String?,
     @ColumnInfo(name = "customer_name") val recipient: String?
 ) : Parcelable
