@@ -19,20 +19,32 @@ class LocationFragment : BaseFragment<LocationViewModel>() {
         return R.layout.fragment_location
     }
 
+    private lateinit var order: Order
+    private lateinit var product: Product
+    private lateinit var location: Location
+
+
     override fun provideViewModel(viewModelFactory: ViewModelProvider.Factory): LocationViewModel {
         return injectViewModel(viewModelFactory)
     }
 
     override fun initialization(view: View, isFirstInit: Boolean) {
-        val order: Order? = arguments?.let { LocationFragmentArgs.fromBundle(it).order }
-        val product: Product? = arguments?.let { LocationFragmentArgs.fromBundle(it).product }
-        val location = Location(1, "R4", "xxxxxxxxxxxxx", "T7", "1268392163", "9", "0000000000")
-        tvProduct.text = product?.name
-        tvOrder.text = "in order ${order?.id}"
+        val order: Order = arguments?.let { LocationFragmentArgs.fromBundle(it).order }!!
+        val product: Product = arguments?.let { LocationFragmentArgs.fromBundle(it).product }!!
 
-        tvValueRow.text = location.row
-        tvValueColumn.text = location.column
-        tvValueShelf.text = location.shelf
+        val title = "Product ${product.name} in order ${order.number}"
+        tvTitle.text = title
+
+        viewModel.locationLiveData.observe(viewLifecycleOwner, {
+            tvValueRow.text = it.row
+            tvValueColumn.text = it.column
+            tvValueShelf.text = it.shelf
+
+            location = it
+        })
+
+        viewModel.getLocation(product.id)
+
         ivScan.setOnClickListener {
             startActivityForResult(
                 Intent(context, CaptureActivity::class.java),
@@ -51,13 +63,34 @@ class LocationFragment : BaseFragment<LocationViewModel>() {
             val result = data?.getStringExtra(CaptureActivity.KEY_RESULT)
             if (result != null) {
                 tvWrong.visibility = View.GONE
-                Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
+                switchScanResult(result)
             } else {
                 tvWrong.visibility = View.VISIBLE
                 Toast.makeText(context, "Cancelled", Toast.LENGTH_SHORT).show()
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    private fun switchScanResult(barcode: String) {
+        when (barcode) {
+            location.columnBarcode -> Toast.makeText(
+                context,
+                "Correct column",
+                Toast.LENGTH_SHORT
+            ).show()
+            location.rowBarcode -> Toast.makeText(
+                context,
+                "Correct row",
+                Toast.LENGTH_SHORT
+            ).show()
+            location.shelfBarcode -> navController.navigate(LocationFragmentDirections.actionLocationFragmentToShelfFragment())
+            else -> Toast.makeText(
+                context,
+                "Wrong location",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }

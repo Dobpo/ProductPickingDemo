@@ -10,7 +10,7 @@ interface LocationDao {
     suspend fun getAll(): List<Location>
 
     @Query("SELECT * FROM locations WHERE id = :id")
-    suspend fun getById(id: Long): Location
+    suspend fun getById(id: Int): Location
 
     @Query("DELETE FROM locations")
     suspend fun clearData()

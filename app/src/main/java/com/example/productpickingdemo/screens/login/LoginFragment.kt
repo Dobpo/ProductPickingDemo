@@ -39,8 +39,7 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
                 .withListener(object : PermissionListener {
                     override fun onPermissionGranted(response: PermissionGrantedResponse) {
                         startActivityForResult(
-                            Intent(context, CaptureActivity::class.java),
-                            QR_REQUEST_CODE
+                            Intent(context, CaptureActivity::class.java), QR_REQUEST_CODE
                         )
                     }
 

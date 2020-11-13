@@ -13,9 +13,9 @@ import javax.inject.Inject
 class ProductsViewModel @Inject constructor(app: Application) : BaseViewModel(app) {
     val productsLiveData: MutableLiveData<List<Product>> = MutableLiveData()
 
-    fun getProducts(orderID: Int) {
+    fun getProducts(orderId: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            val products = dbManager.getProducts(orderID)
+            val products = dbManager.getProducts(orderId)
 
             withContext(Dispatchers.Main) {
                 productsLiveData.postValue(products)

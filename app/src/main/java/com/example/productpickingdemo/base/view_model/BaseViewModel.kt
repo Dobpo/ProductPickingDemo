@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 abstract class BaseViewModel(val app: Application) : AndroidViewModel(app) {
     @Inject
-    lateinit var dbManager: AppDatabase
+    protected lateinit var dbManager: AppDatabase
 
     init {
         App[app].appComponent.inject(this)

@@ -25,12 +25,12 @@ class ProductsFragment : BaseFragment<ProductsViewModel>() {
     override fun initialization(view: View, isFirstInit: Boolean) {
         order = arguments?.let { ProductsFragmentArgs.fromBundle(it).order }!!
 
-        val title = "Product List in order ${order?.number}"
+        val title = "Product List in order ${order.number}"
         tvTitle.text = title
 
         adapter = ProductsAdapter(onClick = {
             navController.navigate(
-                ProductsFragmentDirections.actionProductsFragmentToLocationFragment(order!!, it)
+                ProductsFragmentDirections.actionProductsFragmentToLocationFragment(order, it)
             )
         })
 
@@ -42,11 +42,7 @@ class ProductsFragment : BaseFragment<ProductsViewModel>() {
         viewModel.productsLiveData.observe(viewLifecycleOwner, {
             adapter.setItems(it)
         })
-    }
 
-    override fun onResume() {
-        super.onResume()
-        Log.d("LOG_D", "ProductsFragment.kt : onResume ->  ${order!!.id}")
-        viewModel.getProducts(order!!.id)
+        viewModel.getProducts(order.id)
     }
 }
