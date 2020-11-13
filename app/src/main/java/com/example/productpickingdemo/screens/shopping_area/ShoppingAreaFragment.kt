@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.productpickingdemo.R
 import com.example.productpickingdemo.base.BaseFragment
 import com.example.productpickingdemo.database.entities.Order
-import com.example.productpickingdemo.screens.shelf.ShelfFragmentArgs
 import com.example.productpickingdemo.utils.QR_REQUEST_CODE
 import com.example.productpickingdemo.utils.injectViewModel
 import com.karumi.dexter.Dexter

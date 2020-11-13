@@ -109,29 +109,27 @@ class ShelfFragment : BaseFragment<ShelfViewModel>() {
                     .setNegativeButton("No") { dialog: DialogInterface, _: Int -> dialog.dismiss() }
                     .setPositiveButton("Yes") { dialog: DialogInterface, _: Int ->
                         dialog.dismiss()
+
+                        Log.d("myLogs", "product - $productCount")
                         if (productCount!! > 1) {
                             if (product.requestQuantity == pikedCounterUnit)
                                 viewModel.deleteProduct(product)
-                            else
-                                navController.navigate(
-                                    ShelfFragmentDirections.actionShelfFragmentToProductsFragment(
-                                        order
-                                    )
-                                )
 
-                            viewModel.deleteProductLiveData.observe(this){
-                                navController.navigate(
-                                    ShelfFragmentDirections.actionShelfFragmentToProductsFragment(
-                                        order
-                                    )
+                            navController.navigate(
+                                ShelfFragmentDirections.actionShelfFragmentToProductsFragment(
+                                    order
                                 )
-                            }
-                        } else
+                            )
+                        } else {
+                            if (product.requestQuantity == pikedCounterUnit)
+                                viewModel.deleteProduct(product)
+
                             navController.navigate(
                                 ShelfFragmentDirections.actionShelfFragmentToScanShoppingAreaFragment(
                                     order
                                 )
                             )
+                        }
                     }
                     .show()
             }
