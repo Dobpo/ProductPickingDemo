@@ -1,6 +1,5 @@
 package com.example.productpickingdemo.database
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.productpickingdemo.database.daos.LocationDao
 import com.example.productpickingdemo.database.daos.OrderDao
@@ -29,7 +28,6 @@ class AppDatabaseImpl @Inject constructor(
         orderDao.insertAll(orders)
         locationDao.insertAll(locations)
         productDao.insertAll(products)
-        Log.d("logs", "AppDatabaseImpl initDatabase -> db")
     }
 
     override suspend fun getOrders(): List<Order> {
@@ -69,11 +67,6 @@ class AppDatabaseImpl @Inject constructor(
         val orders = orderDao.getAll()
         val product = productDao.getAll()
         val location = locationDao.getAll()
-
-        Log.d("logs", "AppDatabaseImpl printDb -> $users")
-        Log.d("logs", "AppDatabaseImpl printDb -> $orders")
-        Log.d("logs", "AppDatabaseImpl printDb -> $product")
-        Log.d("logs", "AppDatabaseImpl printDb -> $location")
     }
 
 

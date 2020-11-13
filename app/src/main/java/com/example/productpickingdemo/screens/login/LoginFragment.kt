@@ -2,7 +2,6 @@ package com.example.productpickingdemo.screens.login
 
 import android.Manifest
 import android.content.Intent
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -103,8 +102,6 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
     }
 
     private fun checkUser(id: String, password: String) {
-        Log.d("logs", "LoginFragment checkUser -> id  $id  password $password")
-        Log.d("logs", "LoginFragment checkUser -> $users")
         users.forEach {
             if (it.id.toString() == id && it.password == password) {
                 navController.navigate(LoginFragmentDirections.actionLoginFragmentToOrdersFragment())
