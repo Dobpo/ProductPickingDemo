@@ -1,5 +1,7 @@
 package com.example.productpickingdemo.database
 
+import android.util.Log
+import androidx.lifecycle.LiveData
 import com.example.productpickingdemo.database.daos.LocationDao
 import com.example.productpickingdemo.database.daos.OrderDao
 import com.example.productpickingdemo.database.daos.ProductDao
@@ -27,6 +29,7 @@ class AppDatabaseImpl @Inject constructor(
         orderDao.insertAll(orders)
         locationDao.insertAll(locations)
         productDao.insertAll(products)
+        Log.d("logs", "AppDatabaseImpl initDatabase -> db")
     }
 
     override suspend fun getOrders(): List<Order> {
@@ -53,13 +56,26 @@ class AppDatabaseImpl @Inject constructor(
         orderDao.delete(order)
     }
 
-    override suspend fun getUser(id: Int): User {
+    override fun getUser(id: Int): LiveData<User> {
         return userDao.getById(id)
     }
 
-    override suspend fun getUsers(): List<User> {
+    override fun getUsers(): LiveData<List<User>> {
         return userDao.getAll()
     }
+
+    override suspend fun printDb() {
+        val users = userDao.getAll()
+        val orders = orderDao.getAll()
+        val product = productDao.getAll()
+        val location = locationDao.getAll()
+
+        Log.d("logs", "AppDatabaseImpl printDb -> $users")
+        Log.d("logs", "AppDatabaseImpl printDb -> $orders")
+        Log.d("logs", "AppDatabaseImpl printDb -> $product")
+        Log.d("logs", "AppDatabaseImpl printDb -> $location")
+    }
+
 
     private val locations = listOf(
         Location(1, "R1", "5060773208282", "R1C1", "5060773208329", "R1C1S1", "5060773208367"),
@@ -84,6 +100,7 @@ class AppDatabaseImpl @Inject constructor(
 
     private val users = listOf(
         User(1, "test1", "5060111111118", "12345678"),
-        User(2, "test2", "5060222222228", "11111111")
+        User(2, "test2", "5060222222228", "11111111"),
+        User(3, "test3", "5060222222228", "123")
     )
 }

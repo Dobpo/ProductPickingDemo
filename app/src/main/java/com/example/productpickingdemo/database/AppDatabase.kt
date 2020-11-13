@@ -1,5 +1,6 @@
 package com.example.productpickingdemo.database
 
+import androidx.lifecycle.LiveData
 import com.example.productpickingdemo.database.entities.Location
 import com.example.productpickingdemo.database.entities.Order
 import com.example.productpickingdemo.database.entities.Product
@@ -13,6 +14,7 @@ interface AppDatabase {
     suspend fun updateProduct(product: Product)
     suspend fun deleteProduct(product: Product)
     suspend fun deleteOrder(order: Order)
-    suspend fun getUser(id: Int): User
-    suspend fun getUsers(): List<User>
+    fun getUser(id: Int): LiveData<User>
+    fun getUsers(): LiveData<List<User>>
+    suspend fun printDb()
 }

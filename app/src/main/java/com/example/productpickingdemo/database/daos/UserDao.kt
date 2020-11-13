@@ -1,15 +1,16 @@
 package com.example.productpickingdemo.database.daos
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.productpickingdemo.database.entities.User
 
 @Dao
 interface UserDao {
     @Query("SELECT * FROM users")
-    suspend fun getAll(): List<User>
+    fun getAll(): LiveData<List<User>>
 
     @Query("SELECT * FROM users WHERE id = :id")
-    suspend fun getById(id: Int): User
+    fun getById(id: Int): LiveData<User>
 
     @Query("DELETE FROM users")
     suspend fun clearData()

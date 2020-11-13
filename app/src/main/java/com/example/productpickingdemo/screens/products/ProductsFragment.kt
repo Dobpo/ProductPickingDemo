@@ -1,8 +1,8 @@
 package com.example.productpickingdemo.screens.products
 
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.productpickingdemo.R
 import com.example.productpickingdemo.base.BaseFragment
@@ -39,9 +39,9 @@ class ProductsFragment : BaseFragment<ProductsViewModel>() {
             adapter = this@ProductsFragment.adapter
         }
 
-        viewModel.productsLiveData.observe(viewLifecycleOwner, {
+        viewModel.productsLiveData.observe(viewLifecycleOwner) {
             adapter.setItems(it)
-        })
+        }
 
         viewModel.getProducts(order.id)
     }

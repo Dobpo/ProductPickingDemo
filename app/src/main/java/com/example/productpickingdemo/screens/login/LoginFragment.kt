@@ -2,9 +2,11 @@ package com.example.productpickingdemo.screens.login
 
 import android.Manifest
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.example.productpickingdemo.R
 import com.example.productpickingdemo.base.BaseFragment
 import com.example.productpickingdemo.database.entities.User
@@ -33,13 +35,11 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
     }
 
     override fun initialization(view: View, isFirstInit: Boolean) {
-        //viewModel.initDatabase()
+        viewModel.initDatabase()
 
-        viewModel.usersLiveData.observe(viewLifecycleOwner, {
+        viewModel.getUsers().observe(viewLifecycleOwner) {
             users = it
-        })
-
-        viewModel.getUsers()
+        }
 
         btnLogin.setOnClickListener {
             checkUser(etLogin.text.toString(), etPassword.text.toString())
@@ -103,6 +103,8 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
     }
 
     private fun checkUser(id: String, password: String) {
+        Log.d("logs", "LoginFragment checkUser -> id  $id  password $password")
+        Log.d("logs", "LoginFragment checkUser -> $users")
         users.forEach {
             if (it.id.toString() == id && it.password == password) {
                 navController.navigate(LoginFragmentDirections.actionLoginFragmentToOrdersFragment())
