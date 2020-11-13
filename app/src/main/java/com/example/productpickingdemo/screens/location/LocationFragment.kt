@@ -23,7 +23,6 @@ class LocationFragment : BaseFragment<LocationViewModel>() {
     private lateinit var product: Product
     private lateinit var location: Location
 
-
     override fun provideViewModel(viewModelFactory: ViewModelProvider.Factory): LocationViewModel {
         return injectViewModel(viewModelFactory)
     }
