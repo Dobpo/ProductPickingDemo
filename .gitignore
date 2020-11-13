@@ -31,3 +31,4 @@ lint-report.xml
 
 # trace files
 *.trace
+*app/schemas/
