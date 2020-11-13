@@ -2,4 +2,5 @@
     <string name="app_name">ProductPickingDemo</string>
     <string name="click_to_scan_shipping_area_code">Click to scan Shipping Area code</string>
     <string name="confirm_unloading">Confirm Unloading</string>
+    <string name="permission_denied">Permission denied</string>
 </resources>

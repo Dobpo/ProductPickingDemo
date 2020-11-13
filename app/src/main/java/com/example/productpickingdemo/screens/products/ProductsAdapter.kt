@@ -17,7 +17,7 @@ class ProductsAdapter(
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.product_item, parent, false)
 
-        return ProductsViewHolder(view).listen { pos, type ->
+        return ProductsViewHolder(view).listen { pos, _ ->
             val item = productsList[pos]
             onClick(item)
         }

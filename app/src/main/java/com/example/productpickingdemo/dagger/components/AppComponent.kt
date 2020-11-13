@@ -11,8 +11,7 @@ import javax.inject.Singleton
 @Component(
     modules = [AppModule::class,
         ViewModelFactoryModule::class,
-        DatabaseModule::class,
-        QrModule::class]
+        DatabaseModule::class]
 )
 interface AppComponent {
     fun plus(fragmentModule: FragmentModule): FragmentComponent

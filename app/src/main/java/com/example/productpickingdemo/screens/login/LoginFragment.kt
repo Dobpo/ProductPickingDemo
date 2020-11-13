@@ -36,7 +36,6 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
             navController.navigate(LoginFragmentDirections.actionLoginFragmentToOrdersFragment())
         }
 
-
         ivQrCode.setOnClickListener {
             Dexter.withContext(context)
                 .withPermission(Manifest.permission.CAMERA)
@@ -49,7 +48,11 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
                     }
 
                     override fun onPermissionDenied(response: PermissionDeniedResponse) {
-                        Toast.makeText(context, "Permission denied", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            context,
+                            getString(R.string.permission_denied),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                     override fun onPermissionRationaleShouldBeShown(
@@ -63,7 +66,7 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == 777) {
+        if (requestCode == REQUEST_CODE) {
             val result = data?.getStringExtra(KEY_RESULT) ?: "Cancelled"
             Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
         } else {

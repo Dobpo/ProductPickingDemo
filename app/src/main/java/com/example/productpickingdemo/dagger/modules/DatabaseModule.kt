@@ -59,34 +59,3 @@ class DatabaseModule(app: Application) {
         return AppDatabaseImpl(locationDao, orderDao, userDao, productDao)
     }
 }
-/*
-
-@Module
-class RoomModule(mApplication: Application?) {
-    private val demoDatabase: DemoDatabase
-    init {
-        demoDatabase =
-            Room.databaseBuilder(mApplication!!, DemoDatabase::class.java, "demo-db").build()
-    }
-
-
-    @Singleton
-    @Provides
-    fun providesRoomDatabase(): DemoDatabase {
-        return demoDatabase
-    }
-
-    @Singleton
-    @Provides
-    fun providesProductDao(demoDatabase: DemoDatabase): ProductDao {
-        return demoDatabase.getProductDao()
-    }
-
-    @Singleton
-    @Provides
-    fun productRepository(productDao: ProductDao?): ProductRepository {
-        return ProductDataSource(productDao)
-    }
-
-
-}*/

@@ -8,15 +8,11 @@ import com.example.productpickingdemo.database.entities.Location
 import javax.inject.Inject
 
 class AppDatabaseImpl @Inject constructor(
-    val locationDao: LocationDao,
-    val orderDao: OrderDao,
-    val userDao: UserDao,
-    val productDao: ProductDao
+    private val locationDao: LocationDao,
+    private val orderDao: OrderDao,
+    private val userDao: UserDao,
+    private val productDao: ProductDao
 ) : AppDatabase {
-
-    override fun getProducts(): String {
-        return "test products"
-    }
 
     override fun getLocation(locationId: Int): Location? {
         return locationDao.getById(locationId.toLong())
