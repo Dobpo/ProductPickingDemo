@@ -78,6 +78,7 @@ class ShoppingAreaFragment : BaseFragment<ShoppingAreaViewModel>() {
             .setMessage("Unload The Products of order $orderId?")
             .setNegativeButton("No") { dialog: DialogInterface, _: Int -> dialog.dismiss() }
             .setPositiveButton("Yes") { dialog: DialogInterface, _: Int ->
+                viewModel.removeOrder(order)
                 navController.navigate(ShoppingAreaFragmentDirections.actionScanShoppingAreaFragmentToOrdersFragment())
             }
             .show()
