@@ -1,15 +1,16 @@
 package com.example.productpickingdemo.database.daos
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.productpickingdemo.database.entities.Order
 
 @Dao
 interface OrderDao {
     @Query("SELECT * FROM orders")
-    suspend fun getAll(): List<Order>
+    fun getAll(): LiveData<List<Order>>
 
     @Query("SELECT * FROM orders WHERE id = :id")
-    suspend fun getById(id: Long): Order
+    fun getById(id: Long): LiveData<Order>
 
     @Query("DELETE FROM orders")
     suspend fun clearData()

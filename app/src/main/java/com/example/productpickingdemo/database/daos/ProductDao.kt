@@ -7,7 +7,7 @@ import com.example.productpickingdemo.database.entities.Product
 @Dao
 interface ProductDao {
     @Query("SELECT * FROM products")
-    suspend fun getAll(): List<Product>
+    fun getAll(): LiveData<List<Product>>
 
     @Query("SELECT * FROM products WHERE order_id = :order_id")
     fun getById(order_id: Int): LiveData<List<Product>>

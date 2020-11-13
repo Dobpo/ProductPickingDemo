@@ -20,11 +20,9 @@ class OrdersFragment : BaseFragment<OrderViewModel>() {
     }
 
     override fun initialization(view: View, isFirstInit: Boolean) {
-        viewModel.ordersLiveData.observe(viewLifecycleOwner) {
+        viewModel.getOrders().observe(viewLifecycleOwner) {
             showOrders(it)
         }
-
-        viewModel.getOrders()
     }
 
     private fun showOrders(orders: List<Order>?) {
