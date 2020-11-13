@@ -88,4 +88,7 @@ dependencies {
     //Dexter
     def dexterVersion = "6.2.1"
     implementation "com.karumi:dexter:$dexterVersion"
+
+    //Gson
+    implementation 'com.google.code.gson:gson:2.8.6'
 }

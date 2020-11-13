@@ -4,7 +4,6 @@ import com.example.productpickingdemo.database.entities.Location
 import com.example.productpickingdemo.database.entities.Order
 import com.example.productpickingdemo.database.entities.Product
 
-
 interface AppDatabase {
     suspend fun initDatabase()
     suspend fun getOrders(): List<Order>
