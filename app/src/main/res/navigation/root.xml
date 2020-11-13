@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.productpickingdemo.screens.login_fragment.LoginFragment"
+        android:name="com.example.productpickingdemo.screens.login.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/ordersFragment"
-        android:name="com.example.productpickingdemo.screens.orders_fragment.OrdersFragment"
+        android:name="com.example.productpickingdemo.screens.orders.OrdersFragment"
         android:label="OrdersFragment"
         tools:layout="@layout/fragment_orders">
         <action
@@ -35,11 +35,53 @@
 
     <fragment
         android:id="@+id/productsFragment"
-        android:name="com.example.productpickingdemo.screens.products_fragment.ProductsFragment"
+        android:name="com.example.productpickingdemo.screens.products.ProductsFragment"
         android:label="ProductsFragment"
         tools:layout="@layout/fragment_products">
         <argument
             android:name="order"
-            app:argType="com.example.productpickingdemo.data_base.entities.Order" />
+            app:argType="com.example.productpickingdemo.database.entities.Order" />
+        <action
+            android:id="@+id/action_productsFragment_to_locationFragment"
+            app:destination="@id/locationFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" >
+
+        </action>
     </fragment>
+
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="com.example.productpickingdemo.screens.location.LocationFragment"
+        android:label="LocationFragment"
+        tools:layout="@layout/fragment_location">
+        <argument
+            android:name="order"
+            app:argType="com.example.productpickingdemo.database.entities.Order" />
+        <argument
+            android:name="product"
+            app:argType="com.example.productpickingdemo.database.entities.Product" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/confirmUnloadFragment"
+        android:name="com.example.productpickingdemo.screens.confirm_unload.ConfirmUnloadFragment"
+        android:label="ConfirmUnloadFragment"
+        tools:layout="@layout/fragment_confirm_unload">
+        <action
+            android:id="@+id/action_confirmUnloadFragment_to_scanShoppingAreaFragment"
+            app:destination="@id/scanShoppingAreaFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/scanShoppingAreaFragment"
+        android:name="com.example.productpickingdemo.screens.scan_shopping_area.ScanShoppingAreaFragment"
+        android:label="ScanShoppingAreaFragment"
+        tools:layout="@layout/fragment_scan_shopping_area" />
 </navigation>

@@ -5,8 +5,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.productpickingdemo.base.view_model.DaggerViewModelFactory
 import com.example.productpickingdemo.dagger.ViewModelKey
 import com.example.productpickingdemo.dagger.scopes.FragmentScope
-import com.example.productpickingdemo.screens.login_fragment.LoginViewModel
-import com.example.productpickingdemo.screens.orders_fragment.OrderViewModel
+import com.example.productpickingdemo.screens.confirm_unload.ConfirmUnloadViewModel
+import com.example.productpickingdemo.screens.location.LocationFragment
+import com.example.productpickingdemo.screens.location.LocationViewModel
+import com.example.productpickingdemo.screens.login.LoginViewModel
+import com.example.productpickingdemo.screens.orders.OrderViewModel
+import com.example.productpickingdemo.screens.scan_shopping_area.ScanShoppingAreaViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -28,4 +32,22 @@ abstract class ViewModelFactoryModule {
     @FragmentScope
     @ViewModelKey(OrderViewModel::class)
     internal abstract fun bindOrderViewModel(viewModel: OrderViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @FragmentScope
+    @ViewModelKey(ScanShoppingAreaViewModel::class)
+    internal abstract fun bindScanShoppingAreaViewModel(viewModel: ScanShoppingAreaViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @FragmentScope
+    @ViewModelKey(ConfirmUnloadViewModel::class)
+    internal abstract fun bindConfirmUnloadViewModel(viewModel: ConfirmUnloadViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @FragmentScope
+    @ViewModelKey(LocationViewModel::class)
+    internal abstract fun bindLocationViewModel(viewModel: LocationViewModel): ViewModel
 }

@@ -2,24 +2,21 @@ package com.example.productpickingdemo.dagger.modules
 
 import android.app.Application
 import androidx.room.Room
-import com.example.productpickingdemo.data_base.AppDatabase
-import com.example.productpickingdemo.data_base.AppDatabaseImpl
-import com.example.productpickingdemo.data_base.AppRoomDataBase
-import com.example.productpickingdemo.data_base.daos.LocationDao
-import com.example.productpickingdemo.data_base.daos.OrderDao
-import com.example.productpickingdemo.data_base.daos.ProductDao
-import com.example.productpickingdemo.data_base.daos.UserDao
+import com.example.productpickingdemo.database.AppDatabase
+import com.example.productpickingdemo.database.AppDatabaseImpl
+import com.example.productpickingdemo.database.AppRoomDataBase
+import com.example.productpickingdemo.database.daos.LocationDao
+import com.example.productpickingdemo.database.daos.OrderDao
+import com.example.productpickingdemo.database.daos.ProductDao
+import com.example.productpickingdemo.database.daos.UserDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
 @Module
 class DatabaseModule(app: Application) {
-    private val appRoomDataBase: AppRoomDataBase
-
-    init {
-        appRoomDataBase = Room.databaseBuilder(app, AppRoomDataBase::class.java, "demo-db").build()
-    }
+    private val appRoomDataBase: AppRoomDataBase =
+        Room.databaseBuilder(app, AppRoomDataBase::class.java, "demo-db").build()
 
     @Singleton
     @Provides
