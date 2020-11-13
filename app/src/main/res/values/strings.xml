@@ -3,4 +3,7 @@
     <string name="click_to_scan_shipping_area_code">Click to scan Shipping Area code</string>
     <string name="confirm_unloading">Confirm Unloading</string>
     <string name="permission_denied">Permission denied</string>
+    <string name="go_to_shipping_area">Go to shipping area</string>
+    <string name="no_more_products_on_this_shelf">No more products on this shelf</string>
+    <string name="ok">Ok</string>
 </resources>
