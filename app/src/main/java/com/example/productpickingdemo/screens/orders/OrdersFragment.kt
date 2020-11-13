@@ -69,4 +69,10 @@ class OrdersFragment : BaseFragment<OrderViewModel>() {
             }
         }
     }
+
+    override fun onBackPressed(): Boolean {
+        if (activity != null)
+            activity?.finish()
+        return true
+    }
 }

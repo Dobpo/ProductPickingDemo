@@ -7,8 +7,10 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.productpickingdemo.R
 import com.example.productpickingdemo.base.BaseFragment
+import com.example.productpickingdemo.models.UserModel
 import com.example.productpickingdemo.utils.QR_REQUEST_CODE
 import com.example.productpickingdemo.utils.injectViewModel
+import com.google.gson.Gson
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -64,8 +66,21 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == QR_REQUEST_CODE) {
-            val result = data?.getStringExtra(KEY_RESULT) ?: "Cancelled"
-            Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
+            val result = data?.getStringExtra(KEY_RESULT)
+            if (result != null && result.isNotEmpty()) {
+                val gson = Gson()
+                val user: UserModel
+                try {
+                    user = gson.fromJson(result, UserModel::class.java)
+                    Toast.makeText(context, "${user.id} - ${user.password}", Toast.LENGTH_SHORT)
+                        .show()
+                } catch (e: Exception) {
+                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                    return
+                }
+            } else {
+                Toast.makeText(context, "Cancelled", Toast.LENGTH_SHORT).show()
+            }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
