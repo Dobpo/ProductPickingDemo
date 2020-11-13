@@ -69,10 +69,10 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
         if (requestCode == QR_REQUEST_CODE) {
             val result = data?.getStringExtra(KEY_RESULT)
             if (result != null && result.isNotEmpty()) {
-                val gson = Gson()
                 val user: UserModel
+
                 try {
-                    user = gson.fromJson(result, UserModel::class.java)
+                    user = Gson().fromJson(result, UserModel::class.java)
                     Toast.makeText(context, "${user.id} - ${user.password}", Toast.LENGTH_SHORT)
                         .show()
                 } catch (e: Exception) {
