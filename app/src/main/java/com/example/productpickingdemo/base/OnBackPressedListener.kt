@@ -1,4 +1,4 @@
-package com.example.productpickingdemo.utils
+package com.example.productpickingdemo.base
 
 interface OnBackPressedListener {
     fun onBackPressed(): Boolean

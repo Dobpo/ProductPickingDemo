@@ -5,7 +5,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import com.example.productpickingdemo.base.BaseActivity
-import com.example.productpickingdemo.utils.OnBackPressedListener
+import com.example.productpickingdemo.base.OnBackPressedListener
 
 class MainActivity : BaseActivity() {
     lateinit var navController: NavController

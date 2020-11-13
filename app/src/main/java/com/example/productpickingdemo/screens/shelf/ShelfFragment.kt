@@ -1,4 +1,4 @@
-package com.example.productpickingdemo.screens.pick_products
+package com.example.productpickingdemo.screens.shelf
 
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
@@ -6,12 +6,12 @@ import com.example.productpickingdemo.R
 import com.example.productpickingdemo.base.BaseFragment
 import com.example.productpickingdemo.utils.injectViewModel
 
-class PickProductsFragment : BaseFragment<PickProductsViewModel>() {
+class ShelfFragment : BaseFragment<ShelfViewModel>() {
     override fun layout(): Int {
-        return R.layout.fragment_pick_products
+        return R.layout.fragment_shelf
     }
 
-    override fun provideViewModel(viewModelFactory: ViewModelProvider.Factory): PickProductsViewModel {
+    override fun provideViewModel(viewModelFactory: ViewModelProvider.Factory): ShelfViewModel {
         return injectViewModel(viewModelFactory)
     }
 

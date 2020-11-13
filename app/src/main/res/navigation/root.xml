@@ -47,7 +47,7 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" >
+            app:popExitAnim="@anim/nav_default_pop_exit_anim">
 
         </action>
     </fragment>
@@ -63,25 +63,28 @@
         <argument
             android:name="product"
             app:argType="com.example.productpickingdemo.database.entities.Product" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/confirmUnloadFragment"
-        android:name="com.example.productpickingdemo.screens.confirm_unload.ConfirmUnloadFragment"
-        android:label="ConfirmUnloadFragment"
-        tools:layout="@layout/fragment_confirm_unload">
         <action
-            android:id="@+id/action_confirmUnloadFragment_to_scanShoppingAreaFragment"
-            app:destination="@id/scanShoppingAreaFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            android:id="@+id/action_locationFragment_to_shelfFragment"
+            app:destination="@id/shelfFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/scanShoppingAreaFragment"
-        android:name="com.example.productpickingdemo.screens.scan_shopping_area.ScanShoppingAreaFragment"
+        android:name="com.example.productpickingdemo.screens.shopping_area.ShoppingAreaFragment"
         android:label="ScanShoppingAreaFragment"
-        tools:layout="@layout/fragment_scan_shopping_area" />
+        tools:layout="@layout/fragment_scan_shopping_area">
+        <action
+            android:id="@+id/action_scanShoppingAreaFragment_to_ordersFragment"
+            app:destination="@id/ordersFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/shelfFragment"
+        android:name="com.example.productpickingdemo.screens.shelf.ShelfFragment"
+        android:label="ShelfFragment"
+        tools:layout="@layout/fragment_shelf">
+        <action
+            android:id="@+id/action_shelfFragment_to_scanShoppingAreaFragment"
+            app:destination="@id/scanShoppingAreaFragment" />
+    </fragment>
 </navigation>

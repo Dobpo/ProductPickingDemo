@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="HardcodedText">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
@@ -118,6 +119,7 @@
                 android:background="@drawable/border"
                 android:gravity="center"
                 android:paddingVertical="16dp"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 tools:text="Item" />
         </TableRow>
@@ -144,6 +146,7 @@
                 android:background="@drawable/border"
                 android:gravity="center"
                 android:paddingVertical="16dp"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 tools:text="Item" />
         </TableRow>

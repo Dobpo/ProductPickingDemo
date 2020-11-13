@@ -9,7 +9,7 @@ import com.example.productpickingdemo.base.BaseFragment
 import com.example.productpickingdemo.database.entities.Location
 import com.example.productpickingdemo.database.entities.Order
 import com.example.productpickingdemo.database.entities.Product
-import com.example.productpickingdemo.screens.login.LoginFragment
+import com.example.productpickingdemo.utils.QR_REQUEST_CODE
 import com.example.productpickingdemo.utils.injectViewModel
 import com.king.zxing.CaptureActivity
 import kotlinx.android.synthetic.main.fragment_location.*
@@ -27,7 +27,6 @@ class LocationFragment : BaseFragment<LocationViewModel>() {
         val order: Order? = arguments?.let { LocationFragmentArgs.fromBundle(it).order }
         val product: Product? = arguments?.let { LocationFragmentArgs.fromBundle(it).product }
         val location = Location(1, "R4", "xxxxxxxxxxxxx", "T7", "1268392163", "9", "0000000000")
-//        val s = viewModel.dbManager.getLocation(product?.locationId!!)
         tvProduct.text = product?.name
         tvOrder.text = "in order ${order?.id}"
 
@@ -37,13 +36,18 @@ class LocationFragment : BaseFragment<LocationViewModel>() {
         ivScan.setOnClickListener {
             startActivityForResult(
                 Intent(context, CaptureActivity::class.java),
-                LoginFragment.REQUEST_CODE
+                QR_REQUEST_CODE
             )
+        }
+
+        ivScan.setOnLongClickListener {
+            navController.navigate(LocationFragmentDirections.actionLocationFragmentToShelfFragment())
+            false
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == 777) {
+        if (requestCode == QR_REQUEST_CODE) {
             val result = data?.getStringExtra(CaptureActivity.KEY_RESULT)
             if (result != null) {
                 tvWrong.visibility = View.GONE

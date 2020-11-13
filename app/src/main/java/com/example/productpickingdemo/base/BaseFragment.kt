@@ -13,7 +13,6 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import com.example.productpickingdemo.R
 import com.example.productpickingdemo.base.view_model.BaseViewModel
-import com.example.productpickingdemo.utils.OnBackPressedListener
 import javax.inject.Inject
 
 abstract class BaseFragment<V : BaseViewModel> : Fragment(), OnBackPressedListener {
