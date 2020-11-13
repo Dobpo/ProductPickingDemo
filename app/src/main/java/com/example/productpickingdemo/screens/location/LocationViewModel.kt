@@ -8,9 +8,7 @@ import com.example.productpickingdemo.database.entities.Location
 import javax.inject.Inject
 
 class LocationViewModel @Inject constructor(app: Application) : BaseViewModel(app) {
-    val locationLiveData: MutableLiveData<Location> = MutableLiveData()
-
-    fun getLocation(locationId: Int): LiveData<Location> {
-        return dbManager.getLocation(locationId)
+    fun getLocation(productId: Int): LiveData<Location> {
+        return dbManager.getLocation(productId)
     }
 }

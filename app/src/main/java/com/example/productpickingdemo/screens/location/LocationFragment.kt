@@ -35,15 +35,13 @@ class LocationFragment : BaseFragment<LocationViewModel>() {
         val title = "Product ${product.name} in order ${order.number}"
         tvTitle.text = title
 
-        viewModel.locationLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.getLocation(product.id).observe(viewLifecycleOwner, Observer {
             tvValueRow.text = it.row
             tvValueColumn.text = it.column
             tvValueShelf.text = it.shelf
 
             location = it
         })
-
-        viewModel.getLocation(product.id)
 
         ivScan.setOnClickListener {
             startActivityForResult(
