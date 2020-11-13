@@ -41,6 +41,22 @@ class AppDatabaseImpl @Inject constructor(
         return locationDao.getById(id)
     }
 
+    override suspend fun updateProduct(product: Product) {
+        productDao.update(product)
+    }
+
+    override suspend fun deleteProduct(product: Product) {
+        productDao.delete(product)
+    }
+
+    override suspend fun deleteOrder(order: Order) {
+        orderDao.delete(order)
+    }
+
+    override suspend fun getUser(id: Int): User {
+        return userDao.getById(id)
+    }
+
     private val locations = listOf(
         Location(1, "R1", "5060773208282", "R1C1", "5060773208329", "R1C1S1", "5060773208367"),
         Location(2, "R2", "5060773208299", "R2C1", "5060773208336", "R2C1S2", "5060773208374"),
