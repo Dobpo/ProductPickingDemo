@@ -6,4 +6,11 @@
     <string name="go_to_shipping_area">Go to shipping area</string>
     <string name="no_more_products_on_this_shelf">No more products on this shelf</string>
     <string name="ok">Ok</string>
+    <string name="total_required">Total Required:</string>
+    <string name="picked">Picked :</string>
+    <string name="need_more">Need more:</string>
+    <string name="default_placeholder">-</string>
+    <string name="product">Product:</string>
+    <string name="product_count">Product count</string>
+    <string name="enter_quantity_and_tap_to_scan_the_code">Enter Quantity and tap to scan the code</string>
 </resources>
