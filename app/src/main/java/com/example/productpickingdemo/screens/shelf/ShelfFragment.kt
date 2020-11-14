@@ -92,7 +92,6 @@ class ShelfFragment : BaseFragment<ShelfViewModel>() {
                 }).check()
         }
 
-
         btnSubmit.setOnClickListener {
             var productCount: Int? = null
 

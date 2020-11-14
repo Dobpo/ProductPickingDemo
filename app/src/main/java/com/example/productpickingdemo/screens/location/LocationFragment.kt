@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.example.productpickingdemo.R
 import com.example.productpickingdemo.base.BaseFragment
 import com.example.productpickingdemo.database.entities.Location
@@ -35,13 +36,13 @@ class LocationFragment : BaseFragment<LocationViewModel>() {
         val title = "Product ${product.name} in order ${order.number}"
         tvTitle.text = title
 
-        viewModel.getLocation(product.id).observe(viewLifecycleOwner, Observer {
+        viewModel.getLocation(product.locationId!!).observe(viewLifecycleOwner) {
             tvValueRow.text = it.row
             tvValueColumn.text = it.column
             tvValueShelf.text = it.shelf
 
             location = it
-        })
+        }
 
         ivScan.setOnClickListener {
             startActivityForResult(

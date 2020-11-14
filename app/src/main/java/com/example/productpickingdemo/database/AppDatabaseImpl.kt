@@ -69,7 +69,6 @@ class AppDatabaseImpl @Inject constructor(
         val location = locationDao.getAll()
     }
 
-
     private val locations = listOf(
         Location(1, "R1", "5060773208282", "R1C1", "5060773208329", "R1C1S1", "5060773208367"),
         Location(2, "R2", "5060773208299", "R2C1", "5060773208336", "R2C1S2", "5060773208374"),
