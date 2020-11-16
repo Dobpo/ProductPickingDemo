@@ -11,8 +11,8 @@ import com.example.productpickingdemo.base.BaseFragment
 import com.example.productpickingdemo.database.entities.Location
 import com.example.productpickingdemo.database.entities.Order
 import com.example.productpickingdemo.database.entities.Product
-import com.example.productpickingdemo.utils.QR_REQUEST_CODE
-import com.example.productpickingdemo.utils.injectViewModel
+import com.example.productpickingdemo.utils.*
+import com.google.gson.Gson
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -43,9 +43,9 @@ class LocationFragment : BaseFragment<LocationViewModel>() {
         tvTitle.text = title
 
         viewModel.getLocation(product.locationId!!).observe(viewLifecycleOwner) {
-            tvValueRow.text = it.row
-            tvValueColumn.text = it.column
-            tvValueShelf.text = it.shelf
+            tvRow.text = it.row
+            tvColumn.text = it.column
+            tvShelf.text = it.shelf
 
             location = it
         }
@@ -81,11 +81,17 @@ class LocationFragment : BaseFragment<LocationViewModel>() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == QR_REQUEST_CODE) {
             val result = data?.getStringExtra(CaptureActivity.KEY_RESULT)
-            if (result != null) {
-                tvWrong.visibility = View.GONE
-                switchScanResult(result)
-            } else {
-                tvWrong.visibility = View.VISIBLE
+            result?.let {
+                //tvWrong.visibility = View.GONE
+                try {
+                    val locationItem = Gson().fromJson(result, LocationItem::class.java)
+                    switchScanResult(locationItem)
+                } catch (ex: Exception) {
+                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                    return
+                }
+            } ?: run {
+                //tvWrong.visibility = View.VISIBLE
                 Toast.makeText(context, "Cancelled", Toast.LENGTH_SHORT).show()
             }
         } else {
@@ -93,18 +99,39 @@ class LocationFragment : BaseFragment<LocationViewModel>() {
         }
     }
 
-    private fun switchScanResult(barcode: String) {
-        when (barcode) {
-            location.columnBarcode ->
-                Toast.makeText(context, "Correct column", Toast.LENGTH_SHORT).show()
-            location.rowBarcode ->
-                Toast.makeText(context, "Correct row", Toast.LENGTH_SHORT).show()
-            location.shelfBarcode -> navController.navigate(
-                LocationFragmentDirections.actionLocationFragmentToShelfFragment(order, product)
-            )
+    private fun switchScanResult(locationItem: LocationItem) {
+        when (locationItem.type) {
+            ROW ->
+                if (locationItem.code == location.rowBarcode) {
+                    tvRow.setBackgroundResource(R.drawable.border_green)
+                    tvRowTitle.setBackgroundResource(R.drawable.border_green)
+                } else {
+                    tvRow.setBackgroundResource(R.drawable.border_orange)
+                    tvRowTitle.setBackgroundResource(R.drawable.border_orange)
+                }
+            COLUMN ->
+                if (locationItem.code == location.columnBarcode) {
+                    tvColumn.setBackgroundResource(R.drawable.border_green)
+                    tvColumnTitle.setBackgroundResource(R.drawable.border_green)
+                } else {
+                    tvColumn.setBackgroundResource(R.drawable.border_orange)
+                    tvColumnTitle.setBackgroundResource(R.drawable.border_orange)
+                }
+            SHELF ->
+                if (locationItem.code == location.shelfBarcode) {
+                    navController.navigate(
+                        LocationFragmentDirections.actionLocationFragmentToShelfFragment(
+                            order,
+                            product
+                        )
+                    )
+                } else {
+                    tvShelf.setBackgroundResource(R.drawable.border_orange)
+                    tvShelfTitle.setBackgroundResource(R.drawable.border_orange)
+                }
             else -> Toast.makeText(
                 context,
-                "Wrong location",
+                "Wrong code",
                 Toast.LENGTH_SHORT
             ).show()
         }
