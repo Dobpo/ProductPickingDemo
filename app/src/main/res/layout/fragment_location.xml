@@ -21,12 +21,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:singleLine="true"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:gravity="center"
-            android:singleLine="true"
-            android:ellipsize="end"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,6 +51,7 @@
             android:background="@drawable/border">
 
             <TextView
+                android:id="@+id/tvRowTitle"
                 android:layout_marginStart="1dp"
                 android:layout_marginTop="1dp"
                 android:background="@drawable/border"
@@ -61,7 +62,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvValueRow"
+                android:id="@+id/tvRow"
                 android:layout_marginTop="1dp"
                 android:layout_marginEnd="0.5dp"
                 android:background="@drawable/border"
@@ -78,6 +79,7 @@
             android:background="@drawable/border">
 
             <TextView
+                android:id="@+id/tvColumnTitle"
                 android:layout_marginStart="1dp"
                 android:background="@drawable/border"
                 android:gravity="center"
@@ -87,7 +89,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvValueColumn"
+                android:id="@+id/tvColumn"
                 android:layout_marginEnd="0.5dp"
                 android:background="@drawable/border"
                 android:gravity="center"
@@ -103,6 +105,7 @@
             android:background="@drawable/border">
 
             <TextView
+                android:id="@+id/tvShelfTitle"
                 android:layout_marginStart="1dp"
                 android:layout_marginBottom="1dp"
                 android:background="@drawable/border"
@@ -113,7 +116,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvValueShelf"
+                android:id="@+id/tvShelf"
                 android:layout_marginEnd="0.5dp"
                 android:layout_marginBottom="1dp"
                 android:background="@drawable/border"
