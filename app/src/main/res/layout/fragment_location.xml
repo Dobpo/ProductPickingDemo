@@ -145,7 +145,7 @@
         android:id="@+id/ivScan"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="120dp"
         android:src="@drawable/ic_qr_code_small"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

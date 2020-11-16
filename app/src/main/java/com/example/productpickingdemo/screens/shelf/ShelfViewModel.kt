@@ -21,4 +21,12 @@ class ShelfViewModel @Inject constructor(app: Application) : BaseViewModel(app) 
             dbManager.deleteProduct(product)
         }
     }
+
+    fun getMode(): Int {
+        return sharedPreferences.getMode()
+    }
+
+    fun setMode(mode: Int) {
+        sharedPreferences.setMode(mode)
+    }
 }

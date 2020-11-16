@@ -93,8 +93,8 @@ class AppDatabaseImpl @Inject constructor(
     )
 
     private val users = listOf(
-        User(1, "test1", "5060111111118", "12345678"),
-        User(2, "test2", "5060222222228", "11111111"),
+        User(1, "test1", "5060111111118", "111"),
+        User(2, "test2", "5060222222228", "222"),
         User(3, "test3", "5060222222228", "123")
     )
 }

@@ -1,6 +1,7 @@
 package com.example.productpickingdemo.dagger.modules
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.example.productpickingdemo.database.AppDatabase
 import com.example.productpickingdemo.database.AppDatabaseImpl
@@ -9,14 +10,22 @@ import com.example.productpickingdemo.database.daos.LocationDao
 import com.example.productpickingdemo.database.daos.OrderDao
 import com.example.productpickingdemo.database.daos.ProductDao
 import com.example.productpickingdemo.database.daos.UserDao
+import com.example.productpickingdemo.database.shared_preferences.SharedPreferencesImpl
+import com.example.productpickingdemo.database.shared_preferences.SharedPreferencesManager
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class DatabaseModule(app: Application) {
+class DatabaseModule(private val app: Application) {
     private val appRoomDataBase: AppRoomDataBase =
         Room.databaseBuilder(app, AppRoomDataBase::class.java, "demo-db").build()
+
+    @Singleton
+    @Provides
+    fun provideSPref(): SharedPreferencesManager {
+        return SharedPreferencesImpl(app.applicationContext)
+    }
 
     @Singleton
     @Provides

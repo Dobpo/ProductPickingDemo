@@ -1,5 +1,6 @@
 package com.example.productpickingdemo.screens.location
 
+import android.Manifest
 import android.content.Intent
 import android.view.View
 import android.widget.Toast
@@ -13,6 +14,12 @@ import com.example.productpickingdemo.database.entities.Order
 import com.example.productpickingdemo.database.entities.Product
 import com.example.productpickingdemo.utils.QR_REQUEST_CODE
 import com.example.productpickingdemo.utils.injectViewModel
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.single.PermissionListener
 import com.king.zxing.CaptureActivity
 import kotlinx.android.synthetic.main.fragment_location.*
 
@@ -45,10 +52,30 @@ class LocationFragment : BaseFragment<LocationViewModel>() {
         }
 
         ivScan.setOnClickListener {
-            startActivityForResult(
-                Intent(context, CaptureActivity::class.java),
-                QR_REQUEST_CODE
-            )
+            Dexter.withContext(context)
+                .withPermission(Manifest.permission.CAMERA)
+                .withListener(object : PermissionListener {
+                    override fun onPermissionGranted(response: PermissionGrantedResponse) {
+                        startActivityForResult(
+                            Intent(context, CaptureActivity::class.java), QR_REQUEST_CODE
+                        )
+                    }
+
+                    override fun onPermissionDenied(response: PermissionDeniedResponse) {
+                        Toast.makeText(
+                            context,
+                            getString(R.string.permission_denied),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    override fun onPermissionRationaleShouldBeShown(
+                        permission: PermissionRequest?,
+                        token: PermissionToken?
+                    ) {
+                        token!!.continuePermissionRequest()
+                    }
+                }).check()
         }
     }
 

@@ -15,6 +15,7 @@ captures/*
 .project
 local.properties
 
+
 #Gradle#
 #########
 .gradle

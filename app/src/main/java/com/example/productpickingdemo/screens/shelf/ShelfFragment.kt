@@ -1,11 +1,17 @@
 package com.example.productpickingdemo.screens.shelf
 
 import android.Manifest
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.text.InputFilter
+import android.text.InputFilter.LengthFilter
+import android.text.InputType
 import android.util.Log
 import android.view.View
-import android.widget.Toast
+import android.view.inputmethod.InputMethodManager
+import android.widget.*
+import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
@@ -13,6 +19,7 @@ import com.example.productpickingdemo.R
 import com.example.productpickingdemo.base.BaseFragment
 import com.example.productpickingdemo.database.entities.Order
 import com.example.productpickingdemo.database.entities.Product
+import com.example.productpickingdemo.utils.Modes
 import com.example.productpickingdemo.utils.QR_REQUEST_CODE
 import com.example.productpickingdemo.utils.injectViewModel
 import com.karumi.dexter.Dexter
@@ -48,22 +55,49 @@ class ShelfFragment : BaseFragment<ShelfViewModel>() {
         tvProduct.text = product.name
         tvProductBarcode.text = product.barcode
 
-        tvRequiredCount.text = if (product.requestQuantity!! > 1)
-            "${product.requestQuantity} units"
-        else
-            "${product.requestQuantity} unit"
+        val listMode =
+            listOf("Scan only", "Scan first then quantity", "Enter quantity first")
 
-        tvPickedCount.text = if (pikedCounterUnit > 1)
-            "$pikedCounterUnit units"
-        else
-            "$pikedCounterUnit unit"
+        val adapter = ArrayAdapter(
+            baseContext,
+            android.R.layout.simple_spinner_item,
+            listMode
+        )
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+        spinner.run {
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
+            spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    checkMode(position)
+                    viewModel.setMode(position)
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                }
+            }
+        }
+
+        etProductCount.setOnFocusChangeListener { view, hasFocus ->
+            if (!hasFocus)
+                view.hideKeyboard()
+        }
+
+        spinner.setSelection(viewModel.getMode())
+        checkMode(viewModel.getMode())
+
+        setText(tvRequiredCount, product.requestQuantity!!)
+        setText(tvPickedCount, pikedCounterUnit)
 
         needCounterUnit = product.requestQuantity!! - pikedCounterUnit
-
-        tvNeedCount.text = if (needCounterUnit > 1)
-            "$needCounterUnit units"
-        else
-            "$needCounterUnit unit"
+        setText(tvNeedCount, needCounterUnit)
 
         ivScan.setOnClickListener {
             Dexter.withContext(context)
@@ -150,32 +184,37 @@ class ShelfFragment : BaseFragment<ShelfViewModel>() {
         }
     }
 
+    fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == QR_REQUEST_CODE) {
             val result = data?.getStringExtra(CaptureActivity.KEY_RESULT)
             if (result != null && result.isNotEmpty()) {
                 if (result == product.barcode && needCounterUnit > 0) {
                     setCount = etProductCount.text.toString()
-                    if (setCount.isEmpty() || setCount.toInt() < 1) {
-                        setCount = "1"
+                    when (viewModel.getMode()) {
+                        Modes.SCAN_ONLY.ordinal -> {
+                            setCount = "1"
+                            changeQuantity()
+                        }
+
+                        Modes.ENTER_QUANTITY_FIRST.ordinal -> {
+                            if (setCount.isEmpty() || setCount.toInt() < 1) {
+                                setCount = "1"
+                            }
+                            if (setCount.toInt() > needCounterUnit)
+                                setCount = needCounterUnit.toString()
+
+                            changeQuantity()
+                        }
+
+                        Modes.ENTER_QUANTITY_LAST.ordinal -> {
+                            showDialog()
+                        }
                     }
-                    if (setCount.toInt() > needCounterUnit)
-                        setCount = needCounterUnit.toString()
-
-                    needCounterUnit -= setCount.toInt()
-                    pikedCounterUnit += setCount.toInt()
-
-                    tvNeedCount.text = if (needCounterUnit > 1)
-                        "$needCounterUnit units"
-                    else
-                        "$needCounterUnit unit"
-
-                    tvPickedCount.text = if (pikedCounterUnit > 1)
-                        "$pikedCounterUnit units"
-                    else
-                        "$pikedCounterUnit unit"
-
-                    btnSubmit.isEnabled = needCounterUnit == 0
                 } else
                     Toast.makeText(context, "Wrong data!", Toast.LENGTH_SHORT).show()
             } else {
@@ -184,5 +223,79 @@ class ShelfFragment : BaseFragment<ShelfViewModel>() {
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    private fun setText(view: TextView, count: Int) {
+        view.text = if (count > 1)
+            "$count units"
+        else
+            "$count unit"
+    }
+
+    private fun checkMode(mode: Int) {
+        when (mode) {
+            Modes.SCAN_ONLY.ordinal -> {
+                tilProductCount.visibility = View.GONE
+            }
+
+            Modes.ENTER_QUANTITY_FIRST.ordinal -> {
+                tilProductCount.visibility = View.VISIBLE
+            }
+
+            Modes.ENTER_QUANTITY_LAST.ordinal -> {
+                tilProductCount.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun showDialog() {
+        val maxLength = 10
+        val fArray = arrayOfNulls<InputFilter>(1)
+        fArray[0] = LengthFilter(maxLength)
+
+        val layout = LinearLayout(requireContext())
+        layout.orientation = LinearLayout.VERTICAL
+        val params = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        params.setMargins(48, 0, 32, 0)
+
+        val input = EditText(requireContext())
+        input.layoutParams = params
+        input.inputType = InputType.TYPE_CLASS_NUMBER
+        input.setLines(1)
+        input.maxLines = 1
+        input.filters = fArray
+        layout.addView(input, params)
+
+        AlertDialog.Builder(requireContext())
+            .setMessage("Enter quantity?")
+            .setView(layout)
+            .setCancelable(false)
+            .setNegativeButton("No") { dialog: DialogInterface, _: Int ->
+                setCount = "1"
+                dialog.dismiss()
+                changeQuantity()
+            }
+            .setPositiveButton("Yes") { dialog: DialogInterface, _: Int ->
+                setCount = input.text.toString()
+
+                if (setCount.toInt() > needCounterUnit)
+                    setCount = needCounterUnit.toString()
+
+                dialog.dismiss()
+                changeQuantity()
+            }
+            .show()
+    }
+
+    private fun changeQuantity() {
+        needCounterUnit -= setCount.toInt()
+        pikedCounterUnit += setCount.toInt()
+
+        setText(tvNeedCount, needCounterUnit)
+        setText(tvPickedCount, pikedCounterUnit)
+
+        btnSubmit.isEnabled = needCounterUnit == 0
     }
 }
