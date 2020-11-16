@@ -34,7 +34,7 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
     }
 
     override fun initialization(view: View, isFirstInit: Boolean) {
-        viewModel.initDatabase()
+        viewModel.initUsers()
 
         viewModel.getUsers().observe(viewLifecycleOwner) {
             users = it

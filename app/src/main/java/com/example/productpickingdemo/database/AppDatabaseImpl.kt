@@ -17,14 +17,16 @@ class AppDatabaseImpl @Inject constructor(
     private val userDao: UserDao,
     private val productDao: ProductDao
 ) : AppDatabase {
+    override suspend fun initUsers() {
+        userDao.clearData()
+        userDao.insertAll(users)
+    }
 
     override suspend fun initDatabase() {
-        userDao.clearData()
         orderDao.clearData()
         locationDao.clearData()
         productDao.clearData()
 
-        userDao.insertAll(users)
         orderDao.insertAll(orders)
         locationDao.insertAll(locations)
         productDao.insertAll(products)

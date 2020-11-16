@@ -21,13 +21,19 @@ class OrdersFragment : BaseFragment<OrderViewModel>() {
     }
 
     override fun initialization(view: View, isFirstInit: Boolean) {
-        viewModel.getOrders().observe(viewLifecycleOwner) {
-            showOrders(it)
-        }
+        getOrders()
 
         ivResetDatabase.setOnLongClickListener {
+            viewModel.initDatabase()
             Toast.makeText(context, "Database was reset", Toast.LENGTH_SHORT).show()
+            getOrders()
             false
+        }
+    }
+
+    private fun getOrders() {
+        viewModel.getOrders().observe(viewLifecycleOwner) {
+            showOrders(it)
         }
     }
 

@@ -10,8 +10,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(app: Application) : BaseViewModel(app) {
-    fun initDatabase() = CoroutineScope(IO).launch {
-        dbManager.initDatabase()
+    fun initUsers() = CoroutineScope(IO).launch {
+        dbManager.initUsers()
     }
 
     fun getUsers(): LiveData<List<User>> {

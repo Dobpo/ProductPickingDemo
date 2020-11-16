@@ -7,6 +7,7 @@ import com.example.productpickingdemo.database.entities.Product
 import com.example.productpickingdemo.database.entities.User
 
 interface AppDatabase {
+    suspend fun initUsers()
     suspend fun initDatabase()
     fun getOrders(): LiveData<List<Order>>
     fun getProducts(orderId: Int): LiveData<List<Product>>
