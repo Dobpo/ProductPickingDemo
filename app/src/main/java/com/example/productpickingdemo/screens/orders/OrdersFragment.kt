@@ -1,6 +1,7 @@
 package com.example.productpickingdemo.screens.orders
 
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +23,11 @@ class OrdersFragment : BaseFragment<OrderViewModel>() {
     override fun initialization(view: View, isFirstInit: Boolean) {
         viewModel.getOrders().observe(viewLifecycleOwner) {
             showOrders(it)
+        }
+
+        ivResetDatabase.setOnLongClickListener {
+            Toast.makeText(context, "Database was reset", Toast.LENGTH_SHORT).show()
+            false
         }
     }
 
