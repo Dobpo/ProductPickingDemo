@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "63e27d748f7b3ad2b1e516e9935a61be",
+    "identityHash": "f475980aa27249bc080da18a89c62d67",
     "entities": [
       {
         "tableName": "locations",
@@ -62,7 +62,7 @@
       },
       {
         "tableName": "orders",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `number` INTEGER, `date` TEXT, `customer_name` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `client_id ` INTEGER, `date` TEXT, `customer_name` TEXT, `order_id` INTEGER)",
         "fields": [
           {
             "fieldPath": "id",
@@ -71,8 +71,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "number",
-            "columnName": "number",
+            "fieldPath": "clientId",
+            "columnName": "client_id ",
             "affinity": "INTEGER",
             "notNull": false
           },
@@ -83,9 +83,15 @@
             "notNull": false
           },
           {
-            "fieldPath": "recipient",
+            "fieldPath": "customerName",
             "columnName": "customer_name",
             "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "orderId",
+            "columnName": "order_id",
+            "affinity": "INTEGER",
             "notNull": false
           }
         ],
@@ -219,7 +225,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '63e27d748f7b3ad2b1e516e9935a61be')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f475980aa27249bc080da18a89c62d67')"
     ]
   }
 }

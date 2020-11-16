@@ -29,7 +29,7 @@ class ProductsFragment : BaseFragment<ProductsViewModel>() {
     override fun initialization(view: View, isFirstInit: Boolean) {
         order = arguments?.let { ProductsFragmentArgs.fromBundle(it).order }!!
 
-        val title = "Product List in order ${order.number}"
+        val title = "Product List in order ${order.orderId}"
         tvTitle.text = title
 
         adapter = ProductsAdapter(onClick = {

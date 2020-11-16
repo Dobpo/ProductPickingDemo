@@ -39,7 +39,7 @@ class LocationFragment : BaseFragment<LocationViewModel>() {
         order = arguments?.let { LocationFragmentArgs.fromBundle(it).order }!!
         product = arguments?.let { LocationFragmentArgs.fromBundle(it).product }!!
 
-        val title = "Product ${product.name} in order ${order.number}"
+        val title = "Product ${product.name} in order ${order.orderId}"
         tvTitle.text = title
 
         viewModel.getLocation(product.locationId!!).observe(viewLifecycleOwner) {

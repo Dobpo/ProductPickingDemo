@@ -27,9 +27,10 @@ class OrdersAdapter(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
-        holder.tvOrderNumber?.text = "Order : ${ordersList[position].number}"
-        holder.tvOrderInfo?.text =
-            "Created by ${ordersList[position].recipient} at ${ordersList[position].date}"
+        holder.tvClientId?.text = "Client id : ${ordersList[position].clientId}"
+        holder.tvOrderId?.text = "Order id : ${ordersList[position].orderId}"
+        holder.tvCustomerName?.text = "${ordersList[position].customerName}"
+        holder.tvDate?.text = "Date : ${ordersList[position].date}"
     }
 
     private fun <T : RecyclerView.ViewHolder> T.listen(event: (position: Int, type: Int) -> Unit): T {

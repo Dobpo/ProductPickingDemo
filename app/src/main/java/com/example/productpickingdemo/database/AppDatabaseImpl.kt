@@ -79,15 +79,16 @@ class AppDatabaseImpl @Inject constructor(
     )
 
     private val orders = listOf(
-        Order(1, 20201112005, "2020-11-12", "James_Brown"),
-        Order(2, 20201112006, "2020-11-12", "Michael_Smith"),
-        Order(3, 20201112007, "2020-11-12", "John_Davies")
+
+        Order(1, 20201112005, "2020-11-15", "Ultimate E-commerce",111),
+        Order(2, 20201112006, "2020-11-15", "CLX Cleaning",217),
+        Order(3, 20201112007, "2020-11-15", "AP Office Supplies",103)
     )
 
     private val products = listOf(
-        Product(1, 1, 3, "Pens", "5060773208237", 21, 0),
-        Product(2, 2, 2, "Paper", "5060773208244", 2, 0),
-        Product(3, 2, 1, "Scissors", "5060773208251", 3, 0),
+        Product(1, 1, 3, "Corsanex Gel 50ml", "5060773201603", 2, 0),
+        Product(2, 1, 2, "Corsanex WHO 50ml", "5060773201504", 2, 0),
+        Product(3, 2, 1, "Bleach 5L", "5060773208251", 4, 0),
         Product(4, 3, 3, "Staplers", "5060773208268", 2, 0),
         Product(5, 3, 4, "Pens", "5060773208275", 10, 0)
     )

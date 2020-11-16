@@ -6,11 +6,15 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import kotlinx.android.synthetic.main.item_order.view.*
 
 class OrderViewHolder(view: View) : ViewHolder(view) {
-    var tvOrderNumber: TextView? = null
-    var tvOrderInfo: TextView? = null
+    var tvClientId: TextView? = null
+    var tvOrderId: TextView? = null
+    var tvCustomerName: TextView? = null
+    var tvDate: TextView? = null
 
     init {
-        tvOrderNumber = view.tvOrderNumber
-        tvOrderInfo = view.tvOrderInfo
+        tvClientId = view.tvClientId
+        tvOrderId = view.tvOrderId
+        tvCustomerName = view.tvCustomerName
+        tvDate = view.tvDate
     }
 }
