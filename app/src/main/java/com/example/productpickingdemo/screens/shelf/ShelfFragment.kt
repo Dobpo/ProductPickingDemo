@@ -56,7 +56,7 @@ class ShelfFragment : BaseFragment<ShelfViewModel>() {
         tvProductBarcode.text = product.barcode
 
         val listMode =
-            listOf("Scan only", "Scan first then quantity", "Enter quantity first")
+            listOf("Scan only", "Enter quantity first", "Scan first then quantity")
 
         val adapter = ArrayAdapter(
             baseContext,
