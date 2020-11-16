@@ -10,5 +10,6 @@ import javax.inject.Inject
 class LocationViewModel @Inject constructor(app: Application) : BaseViewModel(app) {
     fun getLocation(productId: Int): LiveData<Location> {
         return dbManager.getLocation(productId)
+
     }
 }

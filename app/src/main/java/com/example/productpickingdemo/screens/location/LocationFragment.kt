@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.Intent
 import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.example.productpickingdemo.R
@@ -96,21 +95,12 @@ class LocationFragment : BaseFragment<LocationViewModel>() {
 
     private fun switchScanResult(barcode: String) {
         when (barcode) {
-            location.columnBarcode -> Toast.makeText(
-                context,
-                "Correct column",
-                Toast.LENGTH_SHORT
-            ).show()
-            location.rowBarcode -> Toast.makeText(
-                context,
-                "Correct row",
-                Toast.LENGTH_SHORT
-            ).show()
+            location.columnBarcode ->
+                Toast.makeText(context, "Correct column", Toast.LENGTH_SHORT).show()
+            location.rowBarcode ->
+                Toast.makeText(context, "Correct row", Toast.LENGTH_SHORT).show()
             location.shelfBarcode -> navController.navigate(
-                LocationFragmentDirections.actionLocationFragmentToShelfFragment(
-                    order,
-                    product
-                )
+                LocationFragmentDirections.actionLocationFragmentToShelfFragment(order, product)
             )
             else -> Toast.makeText(
                 context,
