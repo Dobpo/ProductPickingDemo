@@ -4,8 +4,6 @@ import android.Manifest
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.media.AudioManager
-import android.media.ToneGenerator
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.text.InputType
@@ -23,6 +21,7 @@ import com.example.productpickingdemo.database.entities.Order
 import com.example.productpickingdemo.database.entities.Product
 import com.example.productpickingdemo.utils.Modes
 import com.example.productpickingdemo.utils.QR_REQUEST_CODE
+import com.example.productpickingdemo.utils.ScanUtils
 import com.example.productpickingdemo.utils.injectViewModel
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
@@ -196,6 +195,7 @@ class ShelfFragment : BaseFragment<ShelfViewModel>() {
         if (requestCode == QR_REQUEST_CODE) {
             val result = data?.getStringExtra(CaptureActivity.KEY_RESULT)
             if (result != null && result.isNotEmpty()) {
+                context?.let { ScanUtils.scanPositive(it) }
                 if (result == product.barcode && needCounterUnit > 0) {
                     setCount = etProductCount.text.toString()
                     when (viewModel.getMode()) {
@@ -219,9 +219,7 @@ class ShelfFragment : BaseFragment<ShelfViewModel>() {
                         }
                     }
                 } else
-                    Toast.makeText(context, "Wrong data!", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(context, "Cancelled", Toast.LENGTH_SHORT).show()
+                    context?.let { ScanUtils.scanNegative(it) }
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);

@@ -82,17 +82,13 @@ class LocationFragment : BaseFragment<LocationViewModel>() {
         if (requestCode == QR_REQUEST_CODE) {
             val result = data?.getStringExtra(CaptureActivity.KEY_RESULT)
             result?.let {
-                //tvWrong.visibility = View.GONE
                 try {
                     val locationItem = Gson().fromJson(result, LocationItem::class.java)
                     switchScanResult(locationItem)
                 } catch (ex: Exception) {
-                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                    context?.let { ScanUtils.scanNegative(it) }
                     return
                 }
-            } ?: run {
-                //tvWrong.visibility = View.VISIBLE
-                Toast.makeText(context, "Cancelled", Toast.LENGTH_SHORT).show()
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -105,20 +101,26 @@ class LocationFragment : BaseFragment<LocationViewModel>() {
                 if (locationItem.code == location.rowBarcode) {
                     tvRow.setBackgroundResource(R.drawable.border_green)
                     tvRowTitle.setBackgroundResource(R.drawable.border_green)
+                    context?.let { ScanUtils.scanCorrectRow(it) }
                 } else {
                     tvRow.setBackgroundResource(R.drawable.border_orange)
                     tvRowTitle.setBackgroundResource(R.drawable.border_orange)
+                    context?.let { ScanUtils.scanNegative(it) }
                 }
             COLUMN ->
                 if (locationItem.code == location.columnBarcode) {
                     tvColumn.setBackgroundResource(R.drawable.border_green)
                     tvColumnTitle.setBackgroundResource(R.drawable.border_green)
+                    context?.let { ScanUtils.scanCorrectColumn(it) }
                 } else {
                     tvColumn.setBackgroundResource(R.drawable.border_orange)
                     tvColumnTitle.setBackgroundResource(R.drawable.border_orange)
+                    context?.let { ScanUtils.scanNegative(it) }
+
                 }
             SHELF ->
                 if (locationItem.code == location.shelfBarcode) {
+                    context?.let { ScanUtils.scanPositive(it) }
                     navController.navigate(
                         LocationFragmentDirections.actionLocationFragmentToShelfFragment(
                             order,
@@ -128,6 +130,7 @@ class LocationFragment : BaseFragment<LocationViewModel>() {
                 } else {
                     tvShelf.setBackgroundResource(R.drawable.border_orange)
                     tvShelfTitle.setBackgroundResource(R.drawable.border_orange)
+                    context?.let { ScanUtils.scanCorrectShelf(it) }
                 }
             else -> Toast.makeText(
                 context,

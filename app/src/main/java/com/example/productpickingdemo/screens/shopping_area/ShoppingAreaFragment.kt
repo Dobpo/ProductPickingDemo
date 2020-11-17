@@ -11,6 +11,7 @@ import com.example.productpickingdemo.R
 import com.example.productpickingdemo.base.BaseFragment
 import com.example.productpickingdemo.database.entities.Order
 import com.example.productpickingdemo.utils.QR_REQUEST_CODE
+import com.example.productpickingdemo.utils.ScanUtils
 import com.example.productpickingdemo.utils.injectViewModel
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
@@ -66,7 +67,7 @@ class ShoppingAreaFragment : BaseFragment<ShoppingAreaViewModel>() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == QR_REQUEST_CODE) {
-            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+            context?.let { ScanUtils.scanPositive(it) }
             confirmUnload(order.id.toString())
         } else {
             super.onActivityResult(requestCode, resultCode, data);

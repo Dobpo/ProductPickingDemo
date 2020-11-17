@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.media.RingtoneManager
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -12,6 +13,7 @@ import com.example.productpickingdemo.R
 import com.example.productpickingdemo.base.BaseFragment
 import com.example.productpickingdemo.database.entities.User
 import com.example.productpickingdemo.utils.QR_REQUEST_CODE
+import com.example.productpickingdemo.utils.ScanUtils
 import com.example.productpickingdemo.utils.injectViewModel
 import com.google.gson.Gson
 import com.karumi.dexter.Dexter
@@ -80,29 +82,18 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
         if (requestCode == QR_REQUEST_CODE) {
             val result = data?.getStringExtra(KEY_RESULT)
             if (result != null && result.isNotEmpty()) {
-
-                val url =
-                    Uri.parse("android.resource://" + context?.packageName.toString() + "/" + R.raw.scan)
-
-                val r = RingtoneManager.getRingtone(context, url)
-                r.play()
-
-
-
                 try {
                     val user = Gson().fromJson(result, User::class.java)
                     checkUser(user.name!!, user.password!!)
+                    context?.let { ScanUtils.scanPositive(it) }
                 } catch (e: Exception) {
-                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                    val url =
+                        Uri.parse("android.resource://" + context?.packageName.toString() + "/" + R.raw.error_scan)
+
+                    val r = RingtoneManager.getRingtone(context, url)
+                    r.play()
                     return
                 }
-            } else {
-                val url =
-                    Uri.parse("android.resource://" + context?.packageName.toString() + "/" + R.raw.scan_error)
-
-                val r = RingtoneManager.getRingtone(context, url)
-                r.play()
-                Toast.makeText(context, "Cancelled", Toast.LENGTH_SHORT).show()
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
