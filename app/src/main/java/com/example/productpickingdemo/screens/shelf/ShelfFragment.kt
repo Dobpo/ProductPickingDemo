@@ -4,6 +4,8 @@ import android.Manifest
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.media.AudioManager
+import android.media.ToneGenerator
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.text.InputType
@@ -132,11 +134,12 @@ class ShelfFragment : BaseFragment<ShelfViewModel>() {
             viewModel.getProducts(order.id).observe(this) {
 
                 productCount = it.size
-                Log.d("myLogs", "count  - $productCount")
+
                 val title = if (productCount!! > 1)
                     "End of picking product ${product.name}"
                 else
                     "All Products Picked from Order ${order.id}"
+
                 AlertDialog.Builder(requireContext())
                     .setMessage(title)
                     .setNegativeButton("No") { dialog: DialogInterface, _: Int -> dialog.dismiss() }

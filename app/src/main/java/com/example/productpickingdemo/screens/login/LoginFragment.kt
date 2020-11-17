@@ -2,6 +2,8 @@ package com.example.productpickingdemo.screens.login
 
 import android.Manifest
 import android.content.Intent
+import android.media.RingtoneManager
+import android.net.Uri
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -21,6 +23,7 @@ import com.karumi.dexter.listener.single.PermissionListener
 import com.king.zxing.CaptureActivity
 import com.king.zxing.CaptureActivity.KEY_RESULT
 import kotlinx.android.synthetic.main.fragment_login.*
+
 
 class LoginFragment : BaseFragment<LoginViewModel>() {
     override fun layout(): Int {
@@ -77,6 +80,15 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
         if (requestCode == QR_REQUEST_CODE) {
             val result = data?.getStringExtra(KEY_RESULT)
             if (result != null && result.isNotEmpty()) {
+
+                val url =
+                    Uri.parse("android.resource://" + context?.packageName.toString() + "/" + R.raw.scan)
+
+                val r = RingtoneManager.getRingtone(context, url)
+                r.play()
+
+
+
                 try {
                     val user = Gson().fromJson(result, User::class.java)
                     checkUser(user.name!!, user.password!!)
@@ -85,6 +97,11 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
                     return
                 }
             } else {
+                val url =
+                    Uri.parse("android.resource://" + context?.packageName.toString() + "/" + R.raw.scan_error)
+
+                val r = RingtoneManager.getRingtone(context, url)
+                r.play()
                 Toast.makeText(context, "Cancelled", Toast.LENGTH_SHORT).show()
             }
         } else {
