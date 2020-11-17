@@ -195,8 +195,8 @@ class ShelfFragment : BaseFragment<ShelfViewModel>() {
         if (requestCode == QR_REQUEST_CODE) {
             val result = data?.getStringExtra(CaptureActivity.KEY_RESULT)
             if (result != null && result.isNotEmpty()) {
-                context?.let { ScanUtils.scanPositive(it) }
                 if (result == product.barcode && needCounterUnit > 0) {
+                    context?.let { ScanUtils.scanPositive(it) }
                     setCount = etProductCount.text.toString()
                     when (viewModel.getMode()) {
                         Modes.SCAN_ONLY.ordinal -> {
