@@ -120,7 +120,7 @@ class LocationFragment : BaseFragment<LocationViewModel>() {
                 }
             SHELF ->
                 if (locationItem.code == location.shelfBarcode) {
-                    context?.let { ScanUtils.scanPositive(it) }
+                    context?.let { ScanUtils.scanCorrectShelf(it) }
                     navController.navigate(
                         LocationFragmentDirections.actionLocationFragmentToShelfFragment(
                             order,
@@ -130,7 +130,7 @@ class LocationFragment : BaseFragment<LocationViewModel>() {
                 } else {
                     tvShelf.setBackgroundResource(R.drawable.border_orange)
                     tvShelfTitle.setBackgroundResource(R.drawable.border_orange)
-                    context?.let { ScanUtils.scanCorrectShelf(it) }
+                    context?.let { ScanUtils.scanNegative(it) }
                 }
             else -> Toast.makeText(
                 context,
